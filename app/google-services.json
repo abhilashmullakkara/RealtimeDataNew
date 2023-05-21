@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "611849893781",
+    "project_id": "livedata-b5ba1",
+    "storage_bucket": "livedata-b5ba1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611849893781:android:b2d6a789018026aac6289c",
+        "android_client_info": {
+          "package_name": "com.abhilash.livedata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611849893781-6t9e4hmt5mauvc7o6vc2np5cq4de9g1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8ReJv2zqKGD9WkU5gt3N2-kWVo4iWW9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611849893781-6t9e4hmt5mauvc7o6vc2np5cq4de9g1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
