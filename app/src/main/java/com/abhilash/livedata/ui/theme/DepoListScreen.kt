@@ -16,9 +16,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material.icons.outlined.Phone
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.abhilash.livedata.ui.theme.database.DepoData
+import com.abhilash.livedata.ui.theme.database.OpenDialer
 import com.abhilash.livedata.ui.theme.database.depoList
 
 @Composable
@@ -45,11 +49,6 @@ fun DepoListScreen(navController: NavController) {
 
             LazyColumn {
                 items(depoList) { depo ->
-//                    Text("Depo No:${depo.depoId}", textAlign = TextAlign.Center, modifier = Modifier.padding(start = 60.dp))
-//                    Text(text = depo.depoName,textAlign = TextAlign.Center, modifier = Modifier.padding(start =60.dp ) )
-//                    Text(text = depo.phone,textAlign = TextAlign.Center, modifier = Modifier.padding(start =60.dp ) )
-//                    Text(text = depo.email,textAlign = TextAlign.Center, modifier = Modifier.padding(start = 60.dp))
-//                    Divider()
                 DepoItem(depoData = depo)
                     Divider()
                 }
@@ -61,6 +60,7 @@ fun DepoListScreen(navController: NavController) {
 }
 @Composable
 fun DepoItem(depoData: DepoData){
+    var flag by remember { mutableStateOf(0) }
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(bottom = 8.dp)) {
@@ -92,17 +92,20 @@ fun DepoItem(depoData: DepoData){
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Bold
             )
-
         }
         Column {
-            IconButton(onClick = { },
+            IconButton(onClick = {
+             flag=1
+            },
                 modifier = Modifier
                     .size(80.dp)
                     .padding(16.dp)
             ) {
-                Icon(imageVector = Icons.Outlined.Star, contentDescription = "star")
+                Icon(imageVector = Icons.Outlined.Phone, contentDescription = "star")
             }
-
+            if (flag==1){
+                OpenDialer(phone = depoData.phone)
+            }
         }
 
     }

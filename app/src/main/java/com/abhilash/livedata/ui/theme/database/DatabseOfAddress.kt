@@ -58,7 +58,7 @@ val depoList=listOf(
     DepoData(
         10	,
         "CHADAYAMANGALAM",
-        "474-2476200",
+        "0474-2476200",
         "cdm@kerala.gov.in"
     ),
     DepoData(
@@ -78,90 +78,107 @@ val depoList=listOf(
         "CHATHANNUR",
         "474-2592900",
         "cht@kerala.gov.in"
-   )
+   ),
+    DepoData(
+        14,
+        "CHENGANOOR",
+        "0479-2452352",
+        "cgr@kerala.gov.in",
+   ),
+    DepoData(
+        15,
+        "CHERTHALA",
+	    "478-2812582",
+        "ctl@kerala.gov.in"
+    ),
+    DepoData(
+        16,
+        "CHITOOR",
+	 "492-3227488",
+    "ctr@kerala.gov.in"
+    ),
+    DepoData(
+        17,	"EDATHUVA",
+        "0477-2215400",
+        "edt@kerala.gov.in"
+    ),
+    DepoData(
+        18,
+        "EENCHAKKAL",
+        "0471-2501180",
+        "ekl@kerala.gov.in"
+    ),
+    DepoData(
+        19,
+        "EERATTUPETTAH",
+        "0482-2272230",
+        "etp@kerala.gov.in"
+    ),
+    DepoData(
+        20,
+        "ERNAKULAM",
+	    "0484-2372033",
+        "ekm@kerala.gov.in"
+    ),
+    DepoData(
+        21,
+        "ERUMELY",
+ "0482-8212345",
+"emy@kerala.gov.in"
+    ),
+    DepoData(
+        22,
+        "GURUVAYOOR",
+        "0487-2556450",
+        "gvr@kerala.gov.in"
+    ),
+    DepoData(
+        23,
+        "HARIPPAD",
+	    "0479-2412620",
+        "hpd@kerala.gov.in"
+    ),
+    DepoData(
+        24,
+        "IRINJALAKKUDA",
+        "0480-2823990",
+        "ijk@kerala.gov.in"
+    ),
+    DepoData(
+        25,
+        "KALPETTA",
+        "0493-6202611",
+        "kpt@kerala.gov.in"
+    ),
+    DepoData(
+        26,
+        "KANHANGAD",
+        "0467-2200055",
+        "khd@kerala.gov.in"
+    ),
+    DepoData(
+        27,
+        "KANIYAPURAM",
+        " 0471-2752533",
+        "kpm@kerala.gov.in"
+    ),
+    DepoData(
+        28,
+        "KANNUR",
+        "497-2707777",
+        "knr@kerala.gov.in"
+    ),
+    DepoData(
+        29,
+        "KARUNAGAPALLY",
+	    "0476-2620466",
+        " knp@kerala.gov.in"
+)
 
 )
 //
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, CHATHANNUR
-//14	CHENGANOOR
-//Zone:CENTRAL
-//Dist: ALP	 0479-2452352
-//cgr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, CHENGANOOR
-//15	CHERTHALA
-//Zone:CENTRAL
-//Dist: ALP	 0478-2812582
-//ctl@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, CHERTHALA
-//16	CHITOOR
-//Zone:NORTH
-//Dist: PLK	 0492-3227488
-//ctr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, CHITOOR
-//17	EDATHUVA
-//Zone:CENTRAL
-//Dist: ALP	 0477-2215400
-//edt@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, EDATHUVA
-//18	EENCHAKKAL
-//Zone:SOUTH
-//Dist: TVM	 0471-2501180
-//ekl@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, EENCHAKKAL
-//19	EERATTUPETTAH
-//Zone:CENTRAL
-//Dist: KTM	 0482-2272230
-//etp@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, EERATTUPETTAH
-//20	ERNAKULAM
-//Zone:CENTRAL
-//Dist: EKM	 0484-2372033
-//ekm@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, ERNAKULAM
-//21	ERUMELY
-//Zone:CENTRAL
-//Dist: KTM	 0482-8212345
-//emy@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, ERUMELY
-//22	GURUVAYOOR
-//Zone:CENTRAL
-//Dist: TSR	 0487-2556450
-//gvr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, GURUVAYOOR
-//23	HARIPPAD
-//Zone:CENTRAL
-//Dist: ALP	 0479-2412620
-//hpd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, HARIPPAD
-//24	IRINJALAKKUDA
-//Zone:CENTRAL
-//Dist: TSR	 0480-2823990
-//ijk@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, IRINJALAKKUDA
-//25	KALPETTA
-//Zone:NORTH
-//Dist: WND	 0493-6202611
-//kpt@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KALPETTA
-//26	KANHANGAD
-//Zone:NORTH
-//Dist: KGD	 0467-2200055
-//khd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KANHANGAD
-//27	KANIYAPURAM
-//Zone:SOUTH
-//Dist: TVM	 0471-2752533
-//kpm@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KANIYAPURAM
-//28	KANNUR
-//Zone:NORTH
-//Dist: KNR	 0497-2707777
-//knr@kerala.gov.in
 //OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KANNUR
-//29	KARUNAGAPALLY
-//Zone:SOUTH
-//Dist: KLM	 0476-2620466
-//knp@kerala.gov.in
+//
 //OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KARUNAGAPALLY
 //30	KASARAGOD
 //Zone:NORTH

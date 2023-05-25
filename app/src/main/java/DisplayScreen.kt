@@ -16,6 +16,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -51,7 +52,8 @@ fun  DisplayScreen(navController: NavController){
     val scroll= rememberScrollState()
     var result by rememberSaveable { mutableStateOf("") }
     var etmresult by rememberSaveable { mutableStateOf("") }
-
+    var kilomts by rememberSaveable { mutableStateOf("") }
+Surface(color = Color(0xFF071715)) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -67,7 +69,8 @@ fun  DisplayScreen(navController: NavController){
         ) {
             Icon(
                 imageVector = Icons.Outlined.ArrowBack,
-                contentDescription = "Arrow"
+                contentDescription = "Arrow",
+                tint = Color.White
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -129,6 +132,7 @@ fun  DisplayScreen(navController: NavController){
                         val myRef = dataBase.getReference("$depoNo/$busType/$scheduleNo/")
                         val data = StringBuffer()
                         val etmKmr=StringBuffer()
+                        val kilo=StringBuffer()
                         myRef.get()
                             .addOnSuccessListener { dataSnapshot ->
                                 if (dataSnapshot != null) {
@@ -139,22 +143,18 @@ fun  DisplayScreen(navController: NavController){
                                         data.append("       "+childSnapshot.child("via").value)
                                         data.append("       "+childSnapshot.child("destinationPlace").value)
                                         data.append("       "+childSnapshot.child("kilometer").value)
-                                        etmKmr.append(" "+childSnapshot.child("etmNo").value +",")
+                                        kilo.append(","+childSnapshot.child("kilometer").value)
+                                        etmKmr.append(""+childSnapshot.child("etmNo").value+",")
                                         ti += 1
                                         flag=1
                                     }
                                     ti = 0
                                     result=data.toString()
                                     etmresult=etmKmr.toString()
-                                } else {
-                                    Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT)
-                                        .show()
-                                }
+                                    kilomts=kilo.toString()
+                                } else { Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT).show() }
                             }
-                            .addOnFailureListener {
-                                Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT).show()
-                            }
-
+                            .addOnFailureListener { Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT).show() }
                     }
                     else
                     {
@@ -165,14 +165,21 @@ fun  DisplayScreen(navController: NavController){
             ) {
                 Text("Display")
             }
-            }
+            Text(text = "Check Internet Connection", color = Color.LightGray)
+        }
         if(flag==1){
-              Text(result)
-            Text("\n\nETM Root Numbers: $etmresult")
-            }
+            Text(result, color = Color.White)
+            Text("\n\nETM Root Numbers: $etmresult", color = Color.White)
+            val number=kilomts.split(",")
+            val sum = number.sumOf { it.trim().toIntOrNull() ?: 0 }
+            Text("\nTotal Kilometers: $sum", color = Color.White)
+        }
         else
         {
             flag=0
+          //MyScreen()
         }
     }
+}
+
     }

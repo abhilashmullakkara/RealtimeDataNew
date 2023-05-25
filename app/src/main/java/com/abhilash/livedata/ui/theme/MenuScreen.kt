@@ -1,5 +1,7 @@
 package com.abhilash.livedata.ui.theme
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -7,8 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+
+@RequiresApi(Build.VERSION_CODES.M)
 @Composable
 fun MenuScreen(navController: NavController) {
+
     Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFFFFFFF)) {
         Column {
             TextButton(onClick = {
