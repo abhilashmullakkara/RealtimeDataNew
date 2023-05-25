@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -60,7 +61,7 @@ fun DeleteTripScreen(navController: NavController) {
                 Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
             }
             Text(
-                "Enter Schedule Information to Delete",
+                "Enter Trip Information to Delete",
                 fontSize = 19.sp,
                 color = Color.Red,
                 fontWeight = FontWeight.SemiBold,
@@ -77,7 +78,7 @@ fun DeleteTripScreen(navController: NavController) {
             ) {
                 val scrollState = rememberScrollState()
                 Box(modifier = Modifier.verticalScroll(scrollState)) {
-                    Column {
+                    Column(modifier = Modifier.padding(start=10.dp)) {
 
                         Spacer(modifier = Modifier.height(20.dp))
                     OutlinedTextField(value = depoNo,
@@ -143,7 +144,10 @@ fun DeleteTripScreen(navController: NavController) {
                             )
                         }
                     )
-                        OutlinedButton(onClick = {
+                        Spacer(modifier = Modifier.height(20.dp))
+                        OutlinedButton(colors =ButtonDefaults.buttonColors(backgroundColor = Color.Red) , modifier= Modifier
+                            .fillMaxWidth(0.8f)
+                            .padding(start = 50.dp),onClick = {
                             clicked = true
                             val dataBase = FirebaseDatabase.getInstance()
                             val myRef = dataBase.getReference("$depoNo/$bType/$scheduleNo/")
@@ -170,7 +174,9 @@ fun DeleteTripScreen(navController: NavController) {
                             }
                            // navController.popBackStack()
                         }) {
-                            Text(text = "Delete")
+                            Text(text = "Delete", fontSize = 18.sp,
+                                fontWeight=FontWeight.Bold,
+                                color = Color.White)
 
                         }
 
@@ -178,8 +184,6 @@ fun DeleteTripScreen(navController: NavController) {
 
                             }
                         }
-
-
                 }
                 //End of card |
 
