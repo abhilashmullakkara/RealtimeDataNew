@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
@@ -22,9 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -35,10 +32,8 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.abhilash.livedata.ui.theme.database.OriginalData
 import com.abhilash.livedata.ui.theme.read.isValidText
 import com.google.firebase.database.FirebaseDatabase
 
@@ -54,8 +49,8 @@ fun  DisplayScreen(navController: NavController){
     var flag by rememberSaveable { mutableStateOf(0) }
     val dataBase = FirebaseDatabase.getInstance()
     val scroll= rememberScrollState()
-    val myList= remember{mutableStateListOf<OriginalData>()}
     var result by rememberSaveable { mutableStateOf("") }
+    var etmresult by rememberSaveable { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -133,27 +128,24 @@ fun  DisplayScreen(navController: NavController){
                     if (depoNo.isNotBlank() && busType.isNotBlank() && scheduleNo.isNotBlank()){
                         val myRef = dataBase.getReference("$depoNo/$busType/$scheduleNo/")
                         val data = StringBuffer()
+                        val etmKmr=StringBuffer()
                         myRef.get()
                             .addOnSuccessListener { dataSnapshot ->
                                 if (dataSnapshot != null) {
                                     dataSnapshot.children.forEach { childSnapshot ->
-//                                        myList.add(
-//                                            OriginalData(
-//                                                bustype ="",
-//                                                etmNo="",
-//                                                departureTime = childSnapshot.child("departureTime").value.toString(),
-//                                                startPlace = childSnapshot.child("startPlace").value.toString(),
-//                                                via = childSnapshot.child("via").value as String,
-//                                                destinationPlace = childSnapshot.child("destinationPlace").value as String,
-//                                                arrivalTime = childSnapshot.child("arrivalTime").value as String,
-//                                                kilometer=childSnapshot.child("kilometer").value as String
-//                                            )
-//                                        )
-                                        data.append(childSnapshot.child("departureTime").value)
+                                        data.append("\n "+ (ti+1).toString())
+                                        data.append("       "+childSnapshot.child("departureTime").value)
+                                        data.append("       "+childSnapshot.child("startPlace").value)
+                                        data.append("       "+childSnapshot.child("via").value)
+                                        data.append("       "+childSnapshot.child("destinationPlace").value)
+                                        data.append("       "+childSnapshot.child("kilometer").value)
+                                        etmKmr.append(" "+childSnapshot.child("etmNo").value +",")
                                         ti += 1
                                         flag=1
                                     }
                                     ti = 0
+                                    result=data.toString()
+                                    etmresult=etmKmr.toString()
                                 } else {
                                     Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT)
                                         .show()
@@ -162,7 +154,7 @@ fun  DisplayScreen(navController: NavController){
                             .addOnFailureListener {
                                 Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT).show()
                             }
-                        result=data.toString()
+
                     }
                     else
                     {
@@ -174,41 +166,13 @@ fun  DisplayScreen(navController: NavController){
                 Text("Display")
             }
             }
-        var indx =0
         if(flag==1){
-//            for  (item in myList) {
-//                indx+=1
-//                Text(
-//                    text = "\n$indx  : ${item.departureTime} : ${item.startPlace}  " +
-//                            "Via: ${item.via}  " +
-//                            "  ${item.destinationPlace} " +
-//                            " " +
-//                            ": ${item.arrivalTime}   ${item.kilometer}",
-//                    textAlign = TextAlign.Start
-//                )
               Text(result)
-                Divider()
+            Text("\n\nETM Root Numbers: $etmresult")
             }
-            
-
         else
         {
             flag=0
         }
     }
     }
-//@Composable
-//fun DisplayClassArrayElements(array: List<OriginalData>) {
-//    LazyColumn {
-//        items(array) { item ->
-//            Text(
-//                text = "Start Place: ${item.startPlace}\n" +
-//                        "Via: ${item.via}\n" +
-//                        "Destination Place: ${item.destinationPlace}\n" +
-//                        "Departure Time: ${item.departureTime}\n" +
-//                        "Arrival Time: ${item.arrivalTime}\n",
-//                textAlign = TextAlign.Start
-//            )
-//        }
-//    }
-//}
