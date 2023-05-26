@@ -21,8 +21,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -36,7 +38,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.abhilash.livedata.ui.theme.read.isValidText
+import com.abhilash.livedata.ui.theme.userdatabase.CircularLoadingIndicator
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -168,6 +174,19 @@ Surface(color = Color(0xFF071715)) {
             Text(text = "Check Internet Connection", color = Color.LightGray)
         }
         if(flag==1){
+            var isLoading by remember {
+                mutableStateOf(true) }
+
+            LaunchedEffect(isLoading) {
+                if (isLoading) {
+                    withContext(Dispatchers.Main) {
+                        delay(1400)
+                        isLoading = false
+                    }
+                }
+            }
+
+            CircularLoadingIndicator(isLoading)
             Text(result, color = Color.White)
             Text("\n\nETM Root Numbers: $etmresult", color = Color.White)
             val number=kilomts.split(",")

@@ -52,7 +52,7 @@ val depoList=listOf(
     DepoData(
         9	,
         "BANGALORE",
-        "802-6756666",
+        "0802-6756666",
         "bng.ksrtc@kerala.gov.in"
     ),
     DepoData(
@@ -76,7 +76,7 @@ val depoList=listOf(
     DepoData(
         13,
         "CHATHANNUR",
-        "474-2592900",
+        "0474-2592900",
         "cht@kerala.gov.in"
    ),
     DepoData(
@@ -88,13 +88,13 @@ val depoList=listOf(
     DepoData(
         15,
         "CHERTHALA",
-	    "478-2812582",
+	    "0478-2812582",
         "ctl@kerala.gov.in"
     ),
     DepoData(
         16,
         "CHITOOR",
-	 "492-3227488",
+	 "0492-3227488",
     "ctr@kerala.gov.in"
     ),
     DepoData(
@@ -165,7 +165,7 @@ val depoList=listOf(
     DepoData(
         28,
         "KANNUR",
-        "497-2707777",
+        "0497-2707777",
         "knr@kerala.gov.in"
     ),
     DepoData(
@@ -173,88 +173,98 @@ val depoList=listOf(
         "KARUNAGAPALLY",
 	    "0476-2620466",
         " knp@kerala.gov.in"
-)
+),
+    DepoData(
+        30,
+        "KASARAGOD",
+        "0499-4230677",
+        "kgd@kerala.gov.in"
+    ),
+    DepoData(
+        31,
+        "KATTAKADA",
+        "0471-2290381",
+        "ktd@kerala.gov.in"
+    ),
+    DepoData(
+        32,
+        "KATTAPPANA",
+        "0486-8252333",
+        "ktp@kerala.gov.in"
+    ),
+    DepoData(
+        33,
+        "KAYAMKULAM",
+ 	    "0479-2442022",
+        "kym@kerala.gov.in"
+    ),
+    DepoData(
+        34,
+        "KILIMANOOR",
+        "0470-2672217",
+        "kmr@kerala.gov.in"
+    ),
+    DepoData(
+        35,
+        "KODUNGALOOR",
+    	"0480-2803155",
+        "kdr@kerala.gov.in"
+    ),
+    DepoData(
+        36,
+        "KOLLAM",
+        "0474-2752008",
+        "klm@kerala.gov.in"
+    ),
+    DepoData(
+        37,
+        "KONNI",
+        "0468-2244555",
+        "kni@kerala.gov.in"
+    ),
+    DepoData(
+        38,
+        "KOOTHATTUKULAM",
+        "0485-2253444",
+        "kkm@kerala.gov.in"
+    ),
+    DepoData(
+        39,
+        "KOTHAMANGALAM",
+        "0485-2862202",
+        "kmg@kerala.gov.in"
+    ),
+    DepoData(
+        40,
+        "KOTTARAKKARA",
+        "0474-2452622",
+        "ktr@kerala.gov.in"
+    ),
+    DepoData(
+        41,	"KOTTAYAM",
+        "0481-2562908",
+        "ktm@kerala.gov.in"
+    ),
+    DepoData(
+        42,
+        "KOZHIKODE",
+        "0495-2723796",
+        "kkd@kerala.gov.in"
+    ),
+    DepoData(
+        43,	"KULATHUPUZHA",
+        "0475-2318777",
+        "klp@kerala.gov.in"
+    ),
+    DepoData(
+        44,
+        "KUMALY",
+        "0486-9224242",
+        "kmy@kerala.gov.in"
+    )
+
 
 )
-//
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KANNUR
-//
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KARUNAGAPALLY
-//30	KASARAGOD
-//Zone:NORTH
-//Dist: KGD	 0499-4230677
-//kgd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KASARAGOD
-//31	KATTAKADA
-//Zone:SOUTH
-//Dist: TVM	 0471-2290381
-//ktd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KATTAKADA
-//32	KATTAPPANA
-//Zone:CENTRAL
-//Dist: IDK	 0486-8252333
-//ktp@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KATTAPPANA
-//33	KAYAMKULAM
-//Zone:CENTRAL
-//Dist: ALP	 0479-2442022
-//kym@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KAYAMKULAM
-//34	KILIMANOOR
-//Zone:SOUTH
-//Dist: TVM	 0470-2672217
-//kmr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KILIMANOOR
-//35	KODUNGALOOR
-//Zone:CENTRAL
-//Dist: TSR	 0480-2803155
-//kdr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KODUNGALOOR
-//36	KOLLAM
-//Zone:SOUTH
-//Dist: KLM	 0474-2752008
-//klm@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOLLAM
-//37	KONNI
-//Zone:SOUTH
-//Dist: PTA	 0468-2244555
-//kni@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KONNI
-//38	KOOTHATTUKULAM
-//Zone:CENTRAL
-//Dist: EKM	 0485-2253444
-//kkm@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOOTHATTUKULAM
-//39	KOTHAMANGALAM
-//Zone:CENTRAL
-//Dist: EKM	 0485-2862202
-//kmg@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOTHAMANGALAM
-//40	KOTTARAKKARA
-//Zone:SOUTH
-//Dist: KLM	 0474-2452622
-//ktr@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOTTARAKKARA
-//41	KOTTAYAM
-//Zone:CENTRAL
-//Dist: KTM	 0481-2562908
-//ktm@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOTTAYAM
-//42	KOZHIKODE
-//Zone:NORTH
-//Dist: KKD	 0495-2723796
-//kkd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KOZHIKODE
-//43	KULATHUPUZHA
-//Zone:SOUTH
-//Dist: KLM	 0475-2318777
-//klp@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KULATHUPUZHA
-//44	KUMALY
-//Zone:CENTRAL
-//Dist: IDK	 0486-9224242
-//kmy@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, KUMALY
 //45	MALA
 //Zone:CENTRAL
 //Dist: TSR	 0480-2890438

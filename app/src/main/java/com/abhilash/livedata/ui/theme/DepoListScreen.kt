@@ -61,52 +61,55 @@ fun DepoListScreen(navController: NavController) {
 @Composable
 fun DepoItem(depoData: DepoData){
     var flag by remember { mutableStateOf(0) }
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(bottom = 8.dp)) {
-        Card(modifier = Modifier
-            .padding(end = 8.dp, start = 15.dp)
-            .size(40.dp)
-            .clip(CircleShape),
-            backgroundColor = Color(0XFF896DA3)
-        )
-        {
-        Text(text=depoData.depoName[0].toString(),
-         textAlign = TextAlign.Center, modifier = Modifier.padding(8.dp))
-        }
-        Column(modifier = Modifier.weight(2.0f) ) {
-            Text(depoData.depoName,
-            fontSize = 18.sp,
-             fontWeight = FontWeight.Bold
+    Surface(color = Color(0xFFA5ACAE)){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)) {
+            Card(modifier = Modifier
+                .padding(end = 8.dp, start = 15.dp)
+                .size(40.dp)
+                .clip(CircleShape),
+                backgroundColor = Color(0XFF896DA3)
+            )
+            {
+                Text(text=depoData.depoName[0].toString(),
+                    textAlign = TextAlign.Center, modifier = Modifier.padding(8.dp))
+            }
+            Column(modifier = Modifier.weight(2.0f) ) {
+                Text(depoData.depoName,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
                 )
-            Text("Depo NO:${depoData.depoId}",
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Red
-            )
-            Text(depoData.phone,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(depoData.email,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        Column {
-            IconButton(onClick = {
-             flag=1
-            },
-                modifier = Modifier
-                    .size(80.dp)
-                    .padding(16.dp)
-            ) {
-                Icon(imageVector = Icons.Outlined.Phone, contentDescription = "star")
+                Text("Depo NO:${depoData.depoId}",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Red
+                )
+                Text(depoData.phone,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(depoData.email,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold
+                )
             }
-            if (flag==1){
-                OpenDialer(phone = depoData.phone)
+            Column {
+                IconButton(onClick = {
+                    flag=1
+                },
+                    modifier = Modifier
+                        .size(80.dp)
+                        .padding(16.dp)
+                ) {
+                    Icon(imageVector = Icons.Outlined.Phone, contentDescription = "phone")
+                }
+                if (flag==1){
+                    OpenDialer(phone = depoData.phone)
+                }
             }
-        }
 
+        }
     }
+
 }
