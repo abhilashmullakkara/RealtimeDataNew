@@ -261,40 +261,46 @@ val depoList=listOf(
         "KUMALY",
         "0486-9224242",
         "kmy@kerala.gov.in"
+    ),
+    DepoData(
+        45,
+        "MALA",
+	    " 0480-2890438",
+        "mla@kerala.gov.in"
+    ),
+    DepoData(
+        46,
+        "MALAPPURAM",
+        "0483-2734950",
+        "mlp@kerala.gov.in"
+    ),
+    DepoData(
+        47,
+        "MALLAPALLY",
+    	"0469-2785080",
+        "mpy@kerala.gov.in"
+    ),
+    DepoData(
+        48,
+        "MANANTHAVADY",
+        "0493-5240640",
+        "mnd@kerala.gov.in"
+    ),
+    DepoData(
+        49,
+        "MANNARGHAT",
+        "0492-4225150",
+        "mkd@kerala.gov.in"
+    ),
+    DepoData(
+        50,
+        "MAVELIKARA",
+        "0479-2302282",
+        "mvk@kerala.gov.in"
     )
 
 
 )
-//45	MALA
-//Zone:CENTRAL
-//Dist: TSR	 0480-2890438
-//mla@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MALA
-//46	MALAPPURAM
-//Zone:NORTH
-//Dist: MLP	 0483-2734950
-//mlp@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MALAPPURAM
-//47	MALLAPALLY
-//Zone:SOUTH
-//Dist: PTA	 0469-2785080
-//mpy@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MALLAPALLY
-//48	MANANTHAVADY
-//Zone:NORTH
-//Dist: WND	 0493-5240640
-//mnd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MANANTHAVADY
-//49	MANNARGHAT
-//Zone:NORTH
-//Dist: PLK	 0492-4225150
-//mkd@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MANNARGHAT
-//50	MAVELIKARA
-//Zone:CENTRAL
-//Dist: ALP	 0479-2302282
-//mvk@kerala.gov.in
-//OFFICE OF THE ASSISTANT TRANSPORT OFFICER, KSRTC, MAVELIKARA
 //51	MOOLAMATTOM
 //Zone:CENTRAL
 //Dist: IDK	 0486-2252045

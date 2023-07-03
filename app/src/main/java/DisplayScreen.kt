@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
@@ -24,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -141,14 +141,19 @@ Surface(color = Color(0xFF071715)) {
                         val kilo=StringBuffer()
                         myRef.get()
                             .addOnSuccessListener { dataSnapshot ->
+//                                data.append("\nNo  Time   From   Via   To   Arr:Time    Kmrs\n")
+//                                data.append("  ......................................\n")
                                 if (dataSnapshot != null) {
                                     dataSnapshot.children.forEach { childSnapshot ->
-                                        data.append("\n "+ (ti+1).toString())
-                                        data.append("       "+childSnapshot.child("departureTime").value)
-                                        data.append("       "+childSnapshot.child("startPlace").value)
-                                        data.append("       "+childSnapshot.child("via").value)
-                                        data.append("       "+childSnapshot.child("destinationPlace").value)
-                                        data.append("       "+childSnapshot.child("kilometer").value)
+
+                                        data.append("\n"+ (ti+1).toString())
+                                        data.append("   "+childSnapshot.child("departureTime").value)
+                                        data.append("    "+childSnapshot.child("startPlace").value)
+                                        data.append("    "+childSnapshot.child("via").value)
+                                        data.append("    "+childSnapshot.child("destinationPlace").value)
+                                        data.append("     "+childSnapshot.child("arrivalTime").value)
+                                        data.append("     "+childSnapshot.child("kilometer").value)
+
                                         kilo.append(","+childSnapshot.child("kilometer").value)
                                         etmKmr.append(""+childSnapshot.child("etmNo").value+",")
                                         ti += 1
@@ -174,7 +179,7 @@ Surface(color = Color(0xFF071715)) {
             Text(text = "Check Internet Connection", color = Color.LightGray)
         }
         if(flag==1){
-            var isLoading by remember {
+            var isLoading by rememberSaveable{
                 mutableStateOf(true) }
 
             LaunchedEffect(isLoading) {
@@ -187,11 +192,17 @@ Surface(color = Color(0xFF071715)) {
             }
 
             CircularLoadingIndicator(isLoading)
+            Text(" \nNo   Time  From   Via    To    Arr.Time   Kmrs\n",color= Color.White)
+            Divider(color = Color.Red, thickness = 4.dp)
             Text(result, color = Color.White)
-            Text("\n\nETM Root Numbers: $etmresult", color = Color.White)
             val number=kilomts.split(",")
-            val sum = number.sumOf { it.trim().toIntOrNull() ?: 0 }
+            val sum = number.sumOf { it.trim().toDoubleOrNull() ?: 0.00 }
             Text("\nTotal Kilometers: $sum", color = Color.White)
+
+            Divider(color = Color.Red)
+            Text("\nETM Root Numbers: $etmresult", color = Color.White)
+            Divider(color = Color.Red, thickness = 2.dp)
+            Divider(color = Color.Green, thickness = 3.dp)
         }
         else
         {
