@@ -135,7 +135,55 @@ fun MenuScreen(navController: NavController) {
                         Text("Add Duty ", color = Color.Blue, fontSize = 20.sp)
                     }
                 }
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color.White,
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                         navController.navigate("ViewDiaryScreen")
+                    }) {
+                        Text("View Diary ", color = Color.Blue, fontSize = 20.sp)
+                    }
+                }
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color.White,
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                       navController.navigate("DeleteRecordScreen")
+                    }) {
+                        Text("Delete Record", color = Color.Blue, fontSize = 20.sp)
+                    }
+                }
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color(0xFFF00B04),
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                        navController.navigate("DeleteAllRecordScreen")
+                    }) {
+                        Text("DELETE ALL", color = Color.White, fontSize = 20.sp)
+                    }
+                }
+
             }
+
+
         }
     }
         }

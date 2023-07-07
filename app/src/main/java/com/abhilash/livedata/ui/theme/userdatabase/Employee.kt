@@ -5,12 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Employee (
-    @PrimaryKey
-    var recNo:String,
+
+   // @PrimaryKey
+   // var recNo:String,
      var dutyNo:String,
      var performedOn:String,
      var dutyEarned:String,
     var collection:String="",
     var employeeName:String="",
-    var wayBillNo:String=""
+    var wayBillNo:String="",
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
 )

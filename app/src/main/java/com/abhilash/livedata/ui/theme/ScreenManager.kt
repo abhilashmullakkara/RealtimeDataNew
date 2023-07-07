@@ -9,6 +9,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.abhilash.livedata.ui.theme.read.ReadScreen
 import com.abhilash.livedata.ui.theme.userdatabase.AddDutyDiaryScreen
+import com.abhilash.livedata.ui.theme.userdatabase.DeleteAllRecordScreen
+import com.abhilash.livedata.ui.theme.userdatabase.DeleteRecordScreen
+import com.abhilash.livedata.ui.theme.userdatabase.ViewDiaryScreen
 
 @RequiresApi(Build.VERSION_CODES.M)
 @Composable
@@ -42,6 +45,15 @@ fun ScreenManager(){
         }
         composable("AddDutyDiaryScreen"){
             AddDutyDiaryScreen(navController)
+        }
+        composable("ViewDiaryScreen"){
+            ViewDiaryScreen(navController)
+        }
+        composable("DeleteRecordScreen"){
+            DeleteRecordScreen(navController)
+        }
+        composable("DeleteAllRecordScreen"){
+           DeleteAllRecordScreen(navController)
         }
     }
 }
