@@ -2,7 +2,9 @@ package com.abhilash.livedata.ui.theme.userdatabase
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.os.Build
 import android.widget.DatePicker
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -24,9 +26,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddDutyDiaryScreen(navController: NavController){
     Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -59,10 +66,14 @@ fun AddDutyDiaryScreen(navController: NavController){
     }
 
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun MyCalendar():String {
+fun MyCalendar(): Date {
+    //val format = SimpleDateFormat.getDateInstance()
+    val date:Date = Date() // Replace this with your actual Date object
+    //val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
     val mContext = LocalContext.current
     val mYear1: Int
     val mMonth1: Int
@@ -76,18 +87,42 @@ fun MyCalendar():String {
     val mDatePickerDialog = DatePickerDialog(
         mContext,
         { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
+            mDate.value = "$mDayOfMonth/${mMonth + 1}/$mYear"
         }, mYear1, mMonth1, mDay1
     )
-        Button(onClick = {
+    Button(
+        onClick = {
             mDatePickerDialog.show()
-        },modifier = Modifier.padding(start=10.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF0F9D58)) ) {
-            Text(text = "Select Date", color = Color.White)
+        }, modifier = Modifier.padding(start = 10.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0XFF0F9D58))
+    ) {
+        Text(text = "Select Date", color = Color.White)
+    }
+    Text(
+        text = "Selected Date: ${mDate.value}",
+        fontSize = 17.sp,
+        modifier = Modifier.padding(start = 10.dp)
+    )
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+    println(dateFormat.format(Date())) //data can be inserted in this format function
+
+
+    val format = SimpleDateFormat("dd/MM/yyyy")
+   // val dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ENGLISH)
+    val dateStr = mDate.value
+    return if (dateStr.isEmpty()) {
+        val formattedDateStr = format.format(Date())
+       format.parse(formattedDateStr) ?: Date()
+    }
+    else
+    {
+        try {
+            format.parse(dateStr)
+        } catch (e: ParseException) {
+            val formattedDateStr = format.format(Date())
+            format.parse(formattedDateStr) ?: Date()
         }
-        Text(text = "Selected Date: ${mDate.value}", fontSize = 17.sp,modifier = Modifier.padding(start=10.dp)
-        )
-    return mDate.value
+    }
 }
 
 

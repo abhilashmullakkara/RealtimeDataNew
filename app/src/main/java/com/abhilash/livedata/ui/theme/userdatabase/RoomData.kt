@@ -1,6 +1,9 @@
 package com.abhilash.livedata.ui.theme.userdatabase
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,15 +32,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.abhilash.livedata.ui.theme.read.isValidText
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
+
+//@SuppressLint("SimpleDateFormat")
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RoomData() {
     val context = LocalContext.current
 
+    // var permedDate by rememberSaveable { mutableStateOf(initialDate) }
     val coroutineScope = rememberCoroutineScope()
     var scheduleNo by rememberSaveable { mutableStateOf("") }
     var dutyEearnt by rememberSaveable { mutableStateOf("") }
-    var permedDate by rememberSaveable { mutableStateOf("") }
+    //var permedDate by rememberSaveable { mutableStateOf("") }//mutableStateOf<String?>(null)
+    var permedDate by rememberSaveable { mutableStateOf(Date()) }
     var todayCollection by rememberSaveable { mutableStateOf("") }
     var wBillNo by rememberSaveable { mutableStateOf("") }
     var crewName by rememberSaveable { mutableStateOf("") }
@@ -101,7 +112,7 @@ fun RoomData() {
         )
         Spacer(modifier = Modifier.height(10.dp))
         // Text("Select Date ")
-        permedDate = MyCalendar()
+        permedDate  = MyCalendar()
         Spacer(modifier = Modifier.height(10.dp))
         Text(
             "Optional Data (below)",
@@ -178,17 +189,24 @@ fun RoomData() {
             }
         )
         // rec=(mYear1 + mMonth1 + mDay1+ scheduleNo)
-        OutlinedButton(onClick = {
-            if (scheduleNo.isNotBlank() && dutyEearnt.isNotBlank() && permedDate.isNotBlank()) {
+        //val permedDatenew: String? = "10/05/2022" // Assuming permedDate is a String variable containing the date string
+//
+//        val format =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+//        val dateString: Date = permedDate.let { format.parse(it.toString()) } as Date
+         OutlinedButton(onClick = {
+
+            if (scheduleNo.isNotBlank() && dutyEearnt.isNotBlank()  ) {
                 coroutineScope.launch {
                     if (todayCollection.isBlank()) todayCollection = "--.--"
                     val employee = Employee(
+
                         scheduleNo,
                         permedDate,
                         dutyEearnt,
                         todayCollection,
                         crewName,
-                        wBillNo
+                        wBillNo,
+
                     )
                     EmployeeDB.getInstance(context).getEmployeeDao().insert(employee)
 
@@ -207,3 +225,6 @@ fun RoomData() {
     }
     //MyCalendar()
 }
+
+
+

@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun ViewDiaryScreen(navController: NavController) {
@@ -59,18 +61,20 @@ fun ViewDiaryScreen(navController: NavController) {
             Text("For detailed view rotate the screen ", color = Color.Gray, fontSize = 14.sp)
 
             Row {
-
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
                 OutlinedButton(
                     onClick = {
                         flag = false
                         coroutineScope.launch {
+                           // val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                             val data = StringBuffer()
                             val employeeInfo =
                                 EmployeeDB.getInstance(context).getEmployeeDao().display()
                             for (employe in employeeInfo) {
 
-                                data.append("\n   " + employe.id + ")            " + employe.dutyNo + "          " + employe.performedOn + "          " + employe.dutyEarned)
+                                data.append("\n   " + employe.id + ")            " + employe.dutyNo + "          " +
+                                        format.format(employe.performedOn)  + "          " + employe.dutyEarned)
                                 // data.append(" " + employe.wayBillNo + " " + employe.employeeName + " " + employe.collection)
                             }
 
@@ -95,7 +99,7 @@ fun ViewDiaryScreen(navController: NavController) {
                                 EmployeeDB.getInstance(context).getEmployeeDao().display()
                             for (employe in employeeInfo) {
 
-                                data.append("\n   " + employe.id + ")            " + employe.dutyNo + "           " + employe.performedOn + "           " + employe.dutyEarned)
+                                data.append("\n   " + employe.id + ")            " + employe.dutyNo + "           " + format.format(employe.performedOn) + "           " + employe.dutyEarned)
                                 data.append("            " + employe.wayBillNo + "          " + employe.employeeName + "           ₹" + employe.collection)
                                 // data.append(" " + employe.employeeName + " " + employe.collection + " " + employe.wayBillNo )
                             }

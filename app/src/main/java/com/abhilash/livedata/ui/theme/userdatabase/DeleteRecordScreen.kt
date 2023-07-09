@@ -72,6 +72,8 @@ fun DeleteRecordScreen(navController: NavController){
            if (recNo.isNotBlank()){
                coroutineScope.launch {
                    EmployeeDB.getInstance(context).getEmployeeDao().delete(recNo.toInt())
+                   EmployeeDB.getInstance(context).getEmployeeDao().resetSequence()
+                   //recordList = emptyList()
                    Toast.makeText(context," Record Deleted or not existed !",Toast.LENGTH_SHORT).show()
                }
        }

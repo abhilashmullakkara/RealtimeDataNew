@@ -10,9 +10,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
@@ -20,6 +25,8 @@ import kotlinx.coroutines.launch
 fun DeleteAllRecordScreen(navController: NavController) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    var recordList by remember { mutableStateOf<List<Employee>>(emptyList()) }
+
 
     Surface(color = Color.White) {
         Column {
@@ -31,12 +38,17 @@ fun DeleteAllRecordScreen(navController: NavController) {
         {
             Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
         }
+            Text("      The whole records will be deleted!! ",
+                fontSize = 17.sp, color = Color.Gray)
         OutlinedButton(onClick = {
 
             coroutineScope.launch {
                 EmployeeDB.getInstance(context).getEmployeeDao().deleteAll()
+                EmployeeDB.getInstance(context).getEmployeeDao().resetSequence()
+                recordList = emptyList()
                 Toast.makeText(context, "All records deleted", Toast.LENGTH_SHORT).show()
             }
+
         }) {
             Text(text = "DELETE ALL")
 
@@ -44,3 +56,6 @@ fun DeleteAllRecordScreen(navController: NavController) {
     }
 }
 }
+
+
+
