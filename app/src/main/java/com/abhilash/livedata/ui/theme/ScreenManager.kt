@@ -44,7 +44,9 @@ fun ScreenManager(){
             DepoListScreen(navController)
         }
         composable("AddDutyDiaryScreen"){
-            AddDutyDiaryScreen(navController)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                AddDutyDiaryScreen(navController)
+            }
         }
         composable("ViewDiaryScreen"){
             ViewDiaryScreen(navController)
@@ -54,6 +56,9 @@ fun ScreenManager(){
         }
         composable("DeleteAllRecordScreen"){
            DeleteAllRecordScreen(navController)
+        }
+        composable("FindMyBusScreen"){
+           FindMyBusScreen(navController)
         }
     }
 }
