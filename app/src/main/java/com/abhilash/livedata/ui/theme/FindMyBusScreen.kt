@@ -26,11 +26,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 
+
 @Composable
 fun FindMyBusScreen(navController: NavController) {
     val scroll = rememberScrollState()
     val children1 = remember { mutableStateListOf<String>() }
-    var tolalDepo by rememberSaveable { mutableStateOf(0) }
 
     LaunchedEffect(Unit) {
         // Retrieve the children names from Firebase
@@ -42,7 +42,6 @@ fun FindMyBusScreen(navController: NavController) {
                 val childName = snapshot.key
                 childName?.let { name ->
                     children1.add(name)
-                    tolalDepo++
                 }
             }
 
@@ -50,9 +49,7 @@ fun FindMyBusScreen(navController: NavController) {
             override fun onChildRemoved(snapshot: DataSnapshot) {}
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
-        }
-        )
-        onChildrenNamesLoaded(childrenNames)
+        })
     }
 
     Column(
@@ -70,28 +67,17 @@ fun FindMyBusScreen(navController: NavController) {
 
         Column {
             Text("Children Names:")
-            children1.forEach { name ->
+            for (i in 0 until children1.size) {
+                val name = children1[i]
                 Text(name)
-            }
-        }
-for ( i in 0 until tolalDepo)
-    for (j in 0 until i)
-        if (children1.isNotEmpty()) {
-            val secondGeneration: List<String> = childrenListScreen(children1[i])
-            Column {
-                Text("Children Names:")
-                secondGeneration.forEach { name ->
-                    Text(name)
-                }
-            }
-
-            if (secondGeneration.isNotEmpty()) {
-                val childPath = "${children1[i]}/${secondGeneration[j]}".replace('/', '_')
-                val thirdGeneration: List<String> = childrenListScreen(childPath)
-                Column {
-                    Text("Children Names:")
-                    thirdGeneration.forEach { name ->
-                        Text(name)
+                for (j in 0 until i) {
+                    val childPath = "$children1[i]/"
+                    val secondGeneration: List<String> = childrenListScreen(childPath)
+                    Column {
+                        Text("Children Names:")
+                        secondGeneration.forEach { thirdName ->
+                            Text(thirdName)
+                        }
                     }
                 }
             }
@@ -99,8 +85,9 @@ for ( i in 0 until tolalDepo)
     }
 }
 
+
 @Composable
-fun childrenListScreen(child: String, onChildrenNamesLoaded: (List<String>) -> Unit) {
+fun childrenListScreen(child: String): List<String> {
     val childrenNames = remember { mutableStateListOf<String>() }
 
     // Retrieve the children names from Firebase
@@ -121,18 +108,9 @@ fun childrenListScreen(child: String, onChildrenNamesLoaded: (List<String>) -> U
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
         })
-        onChildrenNamesLoaded(childrenNames)
-
     }
 
-
-    // Display the children names in a Compose UI
-//    Column {
-//        Text("Children Names:")
-//        childrenNames.forEach { name ->
-//            Text(name)
-//        }
-    //}
-    //return childrenNames
+    return childrenNames
 }
+
 
