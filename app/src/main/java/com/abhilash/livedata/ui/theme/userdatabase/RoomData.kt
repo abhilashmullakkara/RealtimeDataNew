@@ -1,6 +1,5 @@
 package com.abhilash.livedata.ui.theme.userdatabase
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -32,9 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.abhilash.livedata.ui.theme.read.isValidText
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 
 
 //@SuppressLint("SimpleDateFormat")
@@ -212,8 +209,15 @@ fun RoomData() {
 
                     Toast.makeText(context, "Record inserted successfully", Toast.LENGTH_SHORT)
                         .show()
+                    scheduleNo=""
+                    dutyEearnt=""
+                    todayCollection=""
+                    crewName=""
+                    wBillNo=""
+
 
                 }
+
 
             } else {
                 Toast.makeText(context, "Input Record first", Toast.LENGTH_SHORT).show()

@@ -10,3 +10,5 @@ data class OriginalData (
     var  arrivalTime:String="",
     var kilometer:String="",
         )
+
+
