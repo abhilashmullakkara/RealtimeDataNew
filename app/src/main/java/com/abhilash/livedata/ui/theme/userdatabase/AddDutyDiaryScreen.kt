@@ -43,26 +43,8 @@ fun AddDutyDiaryScreen(navController: NavController){
         {
             Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
         }
-//        var isLoading by remember {
-//            mutableStateOf(true) }
-//        LaunchedEffect(isLoading) {
-//            if (isLoading) {
-//                withContext(Dispatchers.Main) {
-//                    delay(1500)
-//                    isLoading = false
-//                }
-//            }
-//        }
-//Row{
-//    Spacer(modifier = Modifier.width(150.dp))
-//    CircularLoadingIndicator(isLoading)
-//}
-
         RoomData()
-
-       
     }
-
     }
 
 

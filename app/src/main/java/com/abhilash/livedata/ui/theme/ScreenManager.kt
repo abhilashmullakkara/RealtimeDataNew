@@ -60,5 +60,8 @@ fun ScreenManager(){
         composable("FindMyBusScreen"){
            FindMyBusScreen(navController)
         }
+        composable("UpdateDutyDiaryScreen"){
+            UpdateDutyDiaryScreen(navController)
+        }
     }
 }

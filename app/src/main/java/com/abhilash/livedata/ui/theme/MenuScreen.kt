@@ -181,6 +181,23 @@ fun MenuScreen(navController: NavController) {
                         Text("Delete Record", color = Color.Blue, fontSize = 20.sp)
                     }
                 }
+                //Update Duty Diary
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color.White,
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                        navController.navigate("UpdateDutyDiaryScreen")
+                    }) {
+                        Text("Update duty Diary", color = Color.Blue, fontSize = 20.sp)
+                    }
+                }
+                //
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

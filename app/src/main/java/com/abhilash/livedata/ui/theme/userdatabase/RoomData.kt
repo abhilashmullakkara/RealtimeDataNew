@@ -33,18 +33,13 @@ import com.abhilash.livedata.ui.theme.read.isValidText
 import kotlinx.coroutines.launch
 import java.util.Date
 
-
-//@SuppressLint("SimpleDateFormat")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RoomData() {
     val context = LocalContext.current
-
-    // var permedDate by rememberSaveable { mutableStateOf(initialDate) }
     val coroutineScope = rememberCoroutineScope()
     var scheduleNo by rememberSaveable { mutableStateOf("") }
     var dutyEearnt by rememberSaveable { mutableStateOf("") }
-    //var permedDate by rememberSaveable { mutableStateOf("") }//mutableStateOf<String?>(null)
     var permedDate by rememberSaveable { mutableStateOf(Date()) }
     var todayCollection by rememberSaveable { mutableStateOf("") }
     var wBillNo by rememberSaveable { mutableStateOf("") }
@@ -89,11 +84,6 @@ fun RoomData() {
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
 
             onValueChange = {
-//                    newValue ->
-//                val textFieldValue = TextFieldValue(newValue, TextRange(newValue.length))
-//                if (isValidText(textFieldValue)) {
-//                    dutyEearnt = textFieldValue.text
-//                }
                 dutyEearnt = it
             },
             modifier = Modifier
@@ -185,18 +175,11 @@ fun RoomData() {
                 )
             }
         )
-        // rec=(mYear1 + mMonth1 + mDay1+ scheduleNo)
-        //val permedDatenew: String? = "10/05/2022" // Assuming permedDate is a String variable containing the date string
-//
-//        val format =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-//        val dateString: Date = permedDate.let { format.parse(it.toString()) } as Date
          OutlinedButton(onClick = {
-
             if (scheduleNo.isNotBlank() && dutyEearnt.isNotBlank()  ) {
                 coroutineScope.launch {
                     if (todayCollection.isBlank()) todayCollection = "--.--"
                     val employee = Employee(
-
                         scheduleNo,
                         permedDate,
                         dutyEearnt,

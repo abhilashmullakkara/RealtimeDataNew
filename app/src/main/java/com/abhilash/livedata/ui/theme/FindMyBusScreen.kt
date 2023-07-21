@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -40,7 +41,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-
 fun fetchDatabaseValues(
     databaseRef: DatabaseReference,
     path: String,
@@ -52,13 +52,9 @@ fun fetchDatabaseValues(
         onError(IllegalArgumentException("Path and destination cannot be empty."))
         return
     }
-
     val resultList = mutableListOf<Pair<String, OriginalData>>()
-
-
     databaseRef.addValueEventListener(object : ValueEventListener {
         //addValueEventListener
-
         override fun onDataChange(snapshot: DataSnapshot) {
             val depoSnapshot = snapshot.child(path)
             resultList.clear()
@@ -76,81 +72,74 @@ fun fetchDatabaseValues(
                                 // Add the result to the resultList with scheduleNo
                                 resultList.add(Pair(scheduleNo, trips))
                                 Log.d("FetchDatabaseValues", "Added result for scheduleNo: $scheduleNo")
-
-
                             }
                         }
 
                     }
                 }
             }
-
             onSuccess(resultList)
         }
-
         override fun onCancelled(error: DatabaseError) {
             onError(error.toException())
         }
     })
 }
-
-
 @Composable
-
 fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair<String, OriginalData>>
 {
-    val resultList = remember { mutableStateListOf<Pair<String, OriginalData>>() }
-    //val via=destination
-    val errorMessage = remember { mutableStateOf("") }
-
-    val databaseRef = FirebaseDatabase.getInstance().reference.child("")
-    fetchDatabaseValues(databaseRef,path, destination,{ results ->
-        resultList.clear()
-        resultList.addAll(results)
-        errorMessage.value = "" // Clear any previous error message
-    }, { error ->
-        // Handle error here
-        errorMessage.value = "Error: ${error.message}"
-    })
-
-    Column {
-        if (errorMessage.value.isNotEmpty()) {
-            Text(errorMessage.value)
-        }
-
-        // Display the search results
-        if (resultList.isNotEmpty()) {
-            LazyColumn(modifier = Modifier.padding(start=10.dp)) {
-                items(resultList) { (scheduleNo, result) ->
-                    Text("Bus Type: ${result.bustype}")
-                    Text(text = "Time ${result.departureTime}",color= Color.Red, fontSize = 18.sp)
-                    Text(text = "From ${result.startPlace}")
-                    Text("Via:  ${result.via}")
-                    Text(text = "To ${result.destinationPlace}",color= Color.Red,fontSize = 18.sp)
-                    Text(text = "arrival at: ${result.arrivalTime}")
-                    Text("Duty No: $scheduleNo")
-                    // Display other fields as needed
-
-                    Divider(color = Color.Blue)
-                }
+    Surface(color = Color(0xFFDEE0ED)) {
+        val resultList = remember { mutableStateListOf<Pair<String, OriginalData>>() }
+        val errorMessage = remember { mutableStateOf("") }
+        val databaseRef = FirebaseDatabase.getInstance().reference.child("")
+        fetchDatabaseValues(databaseRef, path, destination, { results ->
+            resultList.clear()
+            resultList.addAll(results)
+            errorMessage.value = "" // Clear any previous error message
+        }, { error ->
+            // Handle error here
+            errorMessage.value = "Error: ${error.message}"
+        })
+        Column {
+            if (errorMessage.value.isNotEmpty()) {
+                Text(errorMessage.value)
             }
-        } else {
-            Text("No matching records found.")
+            // Display the search results
+            if (resultList.isNotEmpty()) {
+                LazyColumn(modifier = Modifier.padding(start = 20.dp)) {
+                    items(resultList) { (scheduleNo, result) ->
+                        Text("Bus Type: ${result.bustype}")
+                        Text(
+                            text = "Time ${result.departureTime}",
+                            color = Color.Red,
+                            fontSize = 18.sp
+                        )
+                        Text(text = "From ${result.startPlace}")
+                        Text("Via:  ${result.via}")
+                        Text(
+                            text = "To ${result.destinationPlace}",
+                            color = Color.Red,
+                            fontSize = 18.sp
+                        )
+                        Text(text = "arrival at: ${result.arrivalTime}")
+                        Text("Duty No: $scheduleNo")
+                        // Display other fields as needed
+                        Divider(color = Color.Gray)
+                    }
+                }
+            } else {
+                Text("No matching records found.")
+            }
         }
+        //return resultList
     }
-
-    //return resultList
 }
 @Composable
 fun FindMyBusScreen(navController:NavController) {
     Surface(color = Color.White) {
-
-
         var depo by rememberSaveable { mutableStateOf("") }
         var destination by rememberSaveable { mutableStateOf("") }
         var flag by rememberSaveable { mutableStateOf(false) }
-        // var path: SnapshotStateList<String>
-        val errorMessage = remember { mutableStateOf("") }
         Column {
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
@@ -173,7 +162,6 @@ fun FindMyBusScreen(navController:NavController) {
             OutlinedTextField(value = destination,
                 singleLine = true,
                 shape = RoundedCornerShape(80),
-                //keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Characters
                 ),
@@ -186,34 +174,29 @@ fun FindMyBusScreen(navController:NavController) {
                     )
                 }
             )
-
+            Text("Press Display button and scroll down to view", color = Color.Gray, fontSize = 19.sp)
             TextButton(onClick = {
                 flag = true
-            }) {
+            }, modifier = Modifier.padding(start=50.dp),
+                elevation = ButtonDefaults.elevation(
+                    defaultElevation = 10.dp,
+                    pressedElevation = 5.dp,
+                    disabledElevation = 0.dp,
+                    hoveredElevation = 5.dp,
+                    focusedElevation = 10.dp
+                )) {
                 Text("DISPLAY")
-
             }
-
              if (flag)  searchAndStorePath(path = depo, destination = destination)
-
-
-
-
     }
-
     }
 }
-
-
 @Composable
 fun ChildrenListScreen(child:String) :List<String>{
     val childrenNames = remember { mutableStateListOf<String>() }
-
-    // Retrieve the children names from Firebase
     LaunchedEffect(Unit) {
         val database = FirebaseDatabase.getInstance()
         val reference = database.getReference("/$child")
-
         reference.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val childName = snapshot.key
@@ -221,26 +204,11 @@ fun ChildrenListScreen(child:String) :List<String>{
                     childrenNames.add(name)
                 }
             }
-
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onChildRemoved(snapshot: DataSnapshot) {}
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
             override fun onCancelled(error: DatabaseError) {}
         })
     }
-
-    // Display the children names in a Compose UI
-    /// childrenNames.forEach{//....}
     return childrenNames
-
 }
-
-
-
-
-
-
-
-
-
-

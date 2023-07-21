@@ -117,7 +117,7 @@ fun ViewDiaryScreen(navController: NavController) {
 
             }
 
-            Text("Record    DutyNo      Performed on    Duty earned     W/B no  CrewName    Collection")
+            Text("Record    Duty      Date    Duty earned     W/B no  CrewName    Collection", modifier = Modifier.padding(start=10.dp).fillMaxWidth())
             Column(modifier = Modifier.verticalScroll(scroll)) {
                 Card(
                     modifier = Modifier
