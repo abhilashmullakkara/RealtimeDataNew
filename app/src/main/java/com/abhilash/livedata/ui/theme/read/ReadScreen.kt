@@ -174,7 +174,7 @@ fun ReadScreen(navController: NavController) {
                             singleLine = true,
                             shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { tripNo = it },
+                            onValueChange = { tripNo = it.replace("\\s+".toRegex(), "") },
                             //modifier=Modifier.padding(start = 20.dp,end=250.dp),
                             placeholder = {
                                 Text(
@@ -189,7 +189,7 @@ fun ReadScreen(navController: NavController) {
                             singleLine = true,
                             shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { departureTime = it },
+                            onValueChange = { departureTime = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Enter Departure Time (eg:- 06.00)",
@@ -206,7 +206,7 @@ fun ReadScreen(navController: NavController) {
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Characters
                             ),
-                            onValueChange = { stPlace = it },
+                            onValueChange = { stPlace = it.replace("\\s+".toRegex(), "") },
                             //modifier=Modifier.padding(start = 20.dp,end=250.dp),
                             placeholder = {
                                 Text(
@@ -224,7 +224,7 @@ fun ReadScreen(navController: NavController) {
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Characters
                             ),
-                            onValueChange = { via = it },
+                            onValueChange = { via = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Enter via (eg:- KTR )",
@@ -240,7 +240,7 @@ fun ReadScreen(navController: NavController) {
                             keyboardOptions = KeyboardOptions(
                                 capitalization = KeyboardCapitalization.Characters
                             ),
-                            onValueChange = { destination = it },
+                            onValueChange = { destination = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Enter Destination Place (eg:- KTM )",
@@ -254,7 +254,7 @@ fun ReadScreen(navController: NavController) {
                             singleLine = true,
                             shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { arrivalTime = it },
+                            onValueChange = { arrivalTime = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Enter Arrival Time (Eg:-18.00)",
@@ -268,7 +268,7 @@ fun ReadScreen(navController: NavController) {
                             singleLine = true,
                             shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { kilometer = it },
+                            onValueChange = { kilometer = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Enter Trip Kilometer :",
@@ -282,7 +282,7 @@ fun ReadScreen(navController: NavController) {
                             singleLine = true,
                             shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { etm = it },
+                            onValueChange = { etm = it.replace("\\s+".toRegex(), "") },
                             placeholder = {
                                 Text(
                                     text = "Etm root No(optional)",
