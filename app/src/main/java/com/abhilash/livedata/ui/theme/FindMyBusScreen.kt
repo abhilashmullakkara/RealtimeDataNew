@@ -60,9 +60,11 @@ fun fetchDatabaseValues(
                     scheduleNoSnapshot.children.forEach { tripsSnapshot ->
                         val trips = tripsSnapshot.getValue(OriginalData::class.java)
                         // Check if trips is not null and destinationPlace matches the search destination
-                        if (trips != null && trips.destinationPlace == destination) {
-                            // Add the result to the resultList with scheduleNo
-                            resultList.add(Pair(scheduleNo, trips))
+                        if (trips != null) {
+                            if ((trips.destinationPlace == destination) || (trips.via == destination)) {
+                                // Add the result to the resultList with scheduleNo
+                                resultList.add(Pair(scheduleNo, trips))
+                            }
                         }
                     }
                 }
@@ -80,12 +82,14 @@ fun fetchDatabaseValues(
 
 @Composable
 
-fun searchAndStorePath(path: String = "-", destination: String = "-"): List<Pair<String, OriginalData>>  {
+fun searchAndStorePath(path: String = "-", destination: String = "-")//: List<Pair<String, OriginalData>>
+{
     val resultList = remember { mutableStateListOf<Pair<String, OriginalData>>() }
+    //val via=destination
     val errorMessage = remember { mutableStateOf("") }
 
     val databaseRef = FirebaseDatabase.getInstance().reference.child("")
-    fetchDatabaseValues(databaseRef, path, destination, { results ->
+    fetchDatabaseValues(databaseRef,path, destination,{ results ->
         resultList.clear()
         resultList.addAll(results)
         errorMessage.value = "" // Clear any previous error message
@@ -120,13 +124,13 @@ fun searchAndStorePath(path: String = "-", destination: String = "-"): List<Pair
         }
     }
 
-    return resultList
+    //return resultList
 }
 @Composable
 fun FindMyBusScreen(navController:NavController) {
     var depo by rememberSaveable { mutableStateOf("") }
     var destination by rememberSaveable { mutableStateOf("") }
-    var path: SnapshotStateList<String>
+   // var path: SnapshotStateList<String>
     val errorMessage = remember { mutableStateOf("") }
     Column {
         IconButton(onClick = { navController.popBackStack() }) {
@@ -163,7 +167,12 @@ fun FindMyBusScreen(navController:NavController) {
                 )
             }
         )
-       path= searchAndStorePath(path=depo,destination=destination) as SnapshotStateList<String>
+
+          // path=
+               searchAndStorePath(path=depo,destination=destination)
+                      // as SnapshotStateList<String>
+
+
 //        path.forEach{
 //            Text(text = it)
 //        }
