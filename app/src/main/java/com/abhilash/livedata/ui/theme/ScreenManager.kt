@@ -12,6 +12,8 @@ import com.abhilash.livedata.ui.theme.userdatabase.AddDutyDiaryScreen
 import com.abhilash.livedata.ui.theme.userdatabase.DeleteAllRecordScreen
 import com.abhilash.livedata.ui.theme.userdatabase.DeleteRecordScreen
 import com.abhilash.livedata.ui.theme.userdatabase.ViewDiaryScreen
+import com.abhilash.livedata.ui.theme.utility.CurrencyCountScreen
+import com.abhilash.livedata.ui.theme.utility.FareTableScreen
 
 @RequiresApi(Build.VERSION_CODES.M)
 @Composable
@@ -61,7 +63,15 @@ fun ScreenManager(){
            FindMyBusScreen(navController)
         }
         composable("UpdateDutyDiaryScreen"){
-            UpdateDutyDiaryScreen(navController)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                UpdateDutyDiaryScreen(navController)
+            }
+        }
+        composable("CurrencyCountScreen"){
+            CurrencyCountScreen(navController)
+        }
+        composable("FareTableScreen"){
+            FareTableScreen(navController)
         }
     }
 }

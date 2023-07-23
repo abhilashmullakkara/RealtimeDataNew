@@ -213,6 +213,37 @@ fun MenuScreen(navController: NavController) {
                         Text("DELETE ALL", color = Color.White, fontSize = 20.sp)
                     }
                 }
+                //Utility functions
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color.White,
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                        navController.navigate("CurrencyCountScreen")
+                    }) {
+                        Text("Currency Count ", color = Color.Blue, fontSize = 20.sp)
+                    }
+                }
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp)
+                        .height(100.dp), // Adjust the height as needed
+                    backgroundColor = Color.White,
+                    shape= CircleShape,
+                    elevation = 5.dp
+                ) {
+                    TextButton(onClick = {
+                        navController.navigate("FareTableScreen")
+                    }) {
+                        Text("Fare Tables ", color = Color.Blue, fontSize = 20.sp)
+                    }
+                }
 
             }
 
