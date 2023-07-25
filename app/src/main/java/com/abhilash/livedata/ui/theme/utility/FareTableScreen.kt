@@ -31,10 +31,12 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -44,7 +46,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import androidx.navigation.NavController
+import com.abhilash.livedata.ui.theme.userdatabase.CircularLoadingIndicator
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -78,21 +82,96 @@ fun FareTableScreen(navController: NavController) {
             )
             {
     Column(modifier = Modifier.verticalScroll(scroll)) {
-      Row {
-        TextButton(onClick = { flag = 1 }) {
-        Text("TVM-KTR-KTM_FP ", color = Color.Blue, fontSize = 20.sp) }
-          TextButton(onClick = { flag2 = 2 })
-          { Text("DOWNLOAD ", color = Color.Blue, fontSize = 20.sp) }
-                } }
-           if (flag == 1) {
-             flag2 = 0
-             Text("Fare Table Checking Stage")
-              DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2/view?usp=drive_link")
+        Text(
+            "Loading of files depends on the speed of the net! ",
+            color = Color.Gray, modifier = Modifier.padding(10.dp)
+        )
+        Surface(color = Color.LightGray) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+
+                TextButton(onClick = { flag = 1 }) {
+                    Text("TVM-KTR-KTM_FP ", color = Color.Blue, fontSize = 20.sp)
                 }
-                if (flag2 == 2) {
-                    flag = 0
-                    DownloadScreen()
+                TextButton(onClick = { flag2 = 1 })
+                {
+                    Text(
+                        "DOWNLOAD ",
+                        color = Color.Blue,
+                        fontSize = 13.sp,
+                        modifier = Modifier.padding(end = 2.dp)
+                    )
                 }
+            }
+        }
+        Surface(color = Color(0xFFAEA4A1)) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                TextButton(onClick = { flag = 2 }) {
+                    Text("TVM-PLR-PAMBA ", color = Color.Blue, fontSize = 20.sp)
+                }
+                TextButton(onClick = { flag2 = 2 })
+                { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+            }
+        }
+        Surface(color = Color.LightGray) {
+
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            TextButton(onClick = { flag = 3 }) {
+                Text("CHAKKULAM-TVM ", color = Color.Blue, fontSize = 20.sp)
+            }
+            TextButton(onClick = { flag2 = 3 })
+            { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+        }
+    }
+    Surface(color = Color(0xFFAEA4A1)) {
+
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            TextButton(onClick = { flag = 4 }) {
+                Text("ALAPPUZHA-VTR", color = Color.Blue, fontSize = 20.sp)
+            }
+            TextButton(onClick = { flag2 = 4 })
+            { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+        }
+    }
+        Surface(color = Color.LightGray) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                TextButton(onClick = { flag = 5 }) {
+                    Text("TVM-VITHURA-J/FARM ", color = Color.Blue, fontSize = 20.sp)
+                }
+                TextButton(onClick = { flag2 = 5 })
+                { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+            }
+        }
+
+    }
+           when (flag) {
+             //flag2 = 0
+             //Text("Fare Table Checking Stage")
+             1 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2/view?usp=drive_link")
+            2 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1Jvxmi62UzZc9Cy34aPDZA22Wo7Zb87l5/view?usp=sharing")
+             3 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1F9QWE78xpfhev20XxfWLbaP_bj8r6SRM/view?usp=sharing")
+            4 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1aSThndOpuPF5sPDCUSLPME1f3x5CslZC/view?usp=sharing")
+            5 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1814DcVdWYRY7F35d2VMNQ6GSWC2wII24/view?usp=sharing")
+           }
+
+                when (flag2 ) {
+                    //https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2
+                    1 ->
+                    DownloadScreen("https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2")
+                    2 ->
+                    DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1Jvxmi62UzZc9Cy34aPDZA22Wo7Zb87l5")
+                    3 ->
+                    DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1F9QWE78xpfhev20XxfWLbaP_bj8r6SRM")
+                    4 ->
+                    DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1aSThndOpuPF5sPDCUSLPME1f3x5CslZC")
+                    5 ->
+                    DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1814DcVdWYRY7F35d2VMNQ6GSWC2wII24")
+
+
+
+                }
+
             }
         }
 
@@ -117,7 +196,7 @@ fun DisplayPdfFromGoogleCloud(pdfUrl: String) {
 }
 
 @Composable
-fun DownloadScreen() {
+fun DownloadScreen(dLink:String) {
     var downloadUrl by remember { mutableStateOf("") }
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -135,8 +214,8 @@ fun DownloadScreen() {
      Surface(color = Color.White) {
          Column {
          var flag by remember { mutableStateOf(false) }
-         downloadUrl =
-             "https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2"
+         downloadUrl =dLink
+            // "https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2"
          Button(
              onClick = {
                  flag = true
