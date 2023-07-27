@@ -46,11 +46,7 @@ fun RoomData() {
     var crewName by rememberSaveable { mutableStateOf("") }
     Column {
 
-        Text(
-            "Enter Information", fontSize = 19.sp,
-            color = Color(0xFF504E98),
-            fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(10.dp)
-        )
+
         OutlinedTextField(
             value = scheduleNo,
             singleLine = true,
@@ -175,6 +171,7 @@ fun RoomData() {
                 )
             }
         )
+        //INSERT
          OutlinedButton(onClick = {
             if (scheduleNo.isNotBlank() && dutyEearnt.isNotBlank()  ) {
                 coroutineScope.launch {

@@ -1,13 +1,17 @@
 package com.abhilash.livedata.ui.theme
 
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
@@ -29,6 +33,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -41,6 +46,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+
 fun fetchDatabaseValues(
     databaseRef: DatabaseReference,
     path: String,
@@ -49,7 +55,7 @@ fun fetchDatabaseValues(
     onError: (Exception) -> Unit
 ) {
     if (path.isEmpty() || destination.isEmpty()) {
-        onError(IllegalArgumentException("Path and destination cannot be empty."))
+        onError(IllegalArgumentException("DepoNo and destination cannot be empty."))
         return
     }
     val resultList = mutableListOf<Pair<String, OriginalData>>()
@@ -106,23 +112,41 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
             }
             // Display the search results
             if (resultList.isNotEmpty()) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Type")
+                    Text("Departure")
+                    Text(text = "From")
+                    Text("Via")
+                    Text("Destination")
+                    Text("Arrival")
+                    Text("DutyNo")
+
+                }
+                Divider()
                 LazyColumn(modifier = Modifier.padding(start = 20.dp)) {
                     items(resultList) { (scheduleNo, result) ->
-                        Text("Bus Type: ${result.bustype}")
-                        Text(
-                            text = "Time ${result.departureTime}",
-                            color = Color.Red,
-                            fontSize = 18.sp
-                        )
-                        Text(text = "From ${result.startPlace}")
-                        Text("Via:  ${result.via}")
-                        Text(
-                            text = "To ${result.destinationPlace}",
-                            color = Color.Red,
-                            fontSize = 18.sp
-                        )
-                        Text(text = "arrival at: ${result.arrivalTime}")
-                        Text("Duty No: $scheduleNo")
+
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 10.dp), horizontalArrangement = Arrangement.SpaceBetween){
+                            Text(" ${result.bustype}")
+                            Text(
+                                text = "${result.departureTime}",
+                                color = Color.Red,
+                                fontSize = 18.sp
+                            )
+                            Text(text = " ${result.startPlace}")
+                            Text(" ${result.via}")
+                            Text(
+                                text = result.destinationPlace,
+                                color = Color.Red,
+                                fontSize = 18.sp
+                            )
+                            Text(text = " ${result.arrivalTime}")
+                            Text(" $scheduleNo")
+
+                        }
+
                         // Display other fields as needed
                         Divider(color = Color.Gray)
                     }
@@ -144,51 +168,82 @@ fun FindMyBusScreen(navController:NavController) {
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
             }
-            Spacer(modifier = Modifier.height(20.dp))
-            OutlinedTextField(value = depo,
-                singleLine = true,
-                shape = RoundedCornerShape(80),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                onValueChange = { depo = it.replace("\\s+".toRegex(), "") },
-                placeholder = {
-                    Text(
-                        text = "Enter Depot Number",
-                        color = Color.Black,
-                        fontSize = 14.sp
+           // Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                "Enter depo number for limiting search within a depo",
+                color = Color.LightGray, fontSize = 16.sp, fontWeight = FontWeight.Bold
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp), horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Box(modifier = Modifier.weight(1f)) {
+                    OutlinedTextField(value = depo,
+                        singleLine = true,
+                        // shape = RoundedCornerShape(80),
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                        onValueChange = { depo = it.replace("\\s+".toRegex(), "") },
+                        placeholder = {
+                            Text(
+                                text = "Depot Number",
+                                color = Color.Black,
+                                fontSize = 14.sp
+                            )
+                        }
                     )
                 }
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            OutlinedTextField(value = destination,
-                singleLine = true,
-                shape = RoundedCornerShape(80),
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Characters
-                ),
-                onValueChange = { destination = it.replace("\\s+".toRegex(), "") },
-                placeholder = {
-                    Text(
-                        text = "Destination",
-                        color = Color.Black,
-                        fontSize = 14.sp
+                Spacer(modifier = Modifier.width(15.dp))
+                Box(modifier = Modifier.weight(1f)) {
+                    OutlinedTextField(value = destination,
+                        singleLine = true,
+                        // shape = RoundedCornerShape(80),
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Characters
+                        ),
+                        onValueChange = { destination = it.replace("\\s+".toRegex(), "") },
+                        placeholder = {
+                            Text(
+                                text = "Destination ",
+                                color = Color.Black,
+                                fontSize = 14.sp
+                            )
+                        }
                     )
                 }
-            )
-            Text("Press Display button and scroll down to view", color = Color.Gray, fontSize = 19.sp)
-            TextButton(onClick = {
-                flag = true
-            }, modifier = Modifier.padding(start=50.dp),
-                elevation = ButtonDefaults.elevation(
-                    defaultElevation = 10.dp,
-                    pressedElevation = 5.dp,
-                    disabledElevation = 0.dp,
-                    hoveredElevation = 5.dp,
-                    focusedElevation = 10.dp
-                )) {
-                Text("DISPLAY")
+
             }
-             if (flag)  searchAndStorePath(path = depo, destination = destination)
-    }
+
+            Text(
+                "Press Display button and scroll down to view",
+                color = Color.Gray,
+                fontSize = 17.sp
+            )
+            TextButton(
+                onClick = {
+                    flag = true
+                }, modifier = Modifier.padding(start = 50.dp),
+//                elevation = ButtonDefaults.elevation(
+//                    defaultElevation = 10.dp,
+//                    pressedElevation = 5.dp,
+//                    disabledElevation = 0.dp,
+//                    hoveredElevation = 5.dp,
+//                    focusedElevation = 10.dp
+//                ),
+                colors= ButtonDefaults.textButtonColors( Color(0xFFAFC6E9))
+            ) {
+                Surface(color = Color(0xFFAFC6E9)) {
+                    Text("DISPLAY")
+                }
+
+            }
+             if (flag) {
+                 Text(text = "Wait...")
+                 searchAndStorePath(path = depo, destination = destination)
+
+             }
+
+        }
     }
 }
 @Composable

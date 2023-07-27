@@ -12,12 +12,15 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -28,15 +31,14 @@ import androidx.compose.material.Surface
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,16 +48,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
 import androidx.navigation.NavController
-import com.abhilash.livedata.ui.theme.userdatabase.CircularLoadingIndicator
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
 fun FareTableScreen(navController: NavController) {
-    var flag by remember { mutableStateOf(0) }
-    var flag2 by remember { mutableStateOf(0) }
+    var flag by remember { mutableStateOf<UShort>(0u) }
+    var flag2 by remember { mutableStateOf<UShort>(0u) }
     Surface(color = Color.White) {
         val scroll= rememberScrollState()
         Column{
@@ -87,16 +87,16 @@ fun FareTableScreen(navController: NavController) {
             color = Color.Gray, modifier = Modifier.padding(10.dp)
         )
         Surface(color = Color.LightGray) {
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
 
-                TextButton(onClick = { flag = 1 }) {
+                TextButton(onClick = { flag = 1u }) {
                     Text("TVM-KTR-KTM_FP ", color = Color.Blue, fontSize = 20.sp)
                 }
-                TextButton(onClick = { flag2 = 1 })
+                TextButton(onClick = { flag2 = 1u },colors= ButtonDefaults.textButtonColors( Color(0xfff2e4f24)))
                 {
                     Text(
                         "DOWNLOAD ",
-                        color = Color.Blue,
+                        color = Color.White,
                         fontSize = 13.sp,
                         modifier = Modifier.padding(end = 2.dp)
                     )
@@ -104,71 +104,70 @@ fun FareTableScreen(navController: NavController) {
             }
         }
         Surface(color = Color(0xFFAEA4A1)) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                TextButton(onClick = { flag = 2 }) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                TextButton(onClick = { flag = 2u }) {
                     Text("TVM-PLR-PAMBA ", color = Color.Blue, fontSize = 20.sp)
                 }
-                TextButton(onClick = { flag2 = 2 })
-                { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+                Spacer(modifier = Modifier.width(20.dp))
+                TextButton(onClick = { flag2 = 2u },colors= ButtonDefaults.textButtonColors( Color(0xfff2e4f24)))
+                { Text("DOWNLOAD ", color = Color.White, fontSize = 13.sp) }
             }
         }
         Surface(color = Color.LightGray) {
-
-
-        Row(modifier = Modifier.fillMaxWidth()) {
-            TextButton(onClick = { flag = 3 }) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            TextButton(onClick = { flag = 3u }) {
                 Text("CHAKKULAM-TVM ", color = Color.Blue, fontSize = 20.sp)
             }
-            TextButton(onClick = { flag2 = 3 })
-            { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+            TextButton(onClick = { flag2 = 3u },colors= ButtonDefaults.textButtonColors( Color(0xfff2e4f24)))
+            { Text("DOWNLOAD ", color = Color.White, fontSize = 13.sp) }
         }
     }
     Surface(color = Color(0xFFAEA4A1)) {
 
-
-        Row(modifier = Modifier.fillMaxWidth()) {
-            TextButton(onClick = { flag = 4 }) {
+// horizontalArrangement = Arrangement.SpaceBetween
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            TextButton(onClick = { flag = 4u }) {
                 Text("ALAPPUZHA-VTR", color = Color.Blue, fontSize = 20.sp)
             }
-            TextButton(onClick = { flag2 = 4 })
-            { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+            TextButton(onClick = { flag2 = 4u },colors= ButtonDefaults.textButtonColors( Color(0xfff2e4f24)))
+            { Text("DOWNLOAD ", color = Color.White, fontSize = 13.sp) }
         }
     }
         Surface(color = Color.LightGray) {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                TextButton(onClick = { flag = 5 }) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                TextButton(onClick = { flag = 5u }) {
                     Text("TVM-VITHURA-J/FARM ", color = Color.Blue, fontSize = 20.sp)
                 }
-                TextButton(onClick = { flag2 = 5 })
-                { Text("DOWNLOAD ", color = Color.Blue, fontSize = 13.sp) }
+
+                TextButton(onClick = { flag2 = 5u },colors= ButtonDefaults.textButtonColors( Color(0xfff2e4f24)),
+                )
+                {
+                    Text("DOWNLOAD ", color = Color.White, fontSize = 13.sp)
+                }
             }
+
         }
 
     }
-           when (flag) {
-             //flag2 = 0
-             //Text("Fare Table Checking Stage")
-             1 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2/view?usp=drive_link")
-            2 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1Jvxmi62UzZc9Cy34aPDZA22Wo7Zb87l5/view?usp=sharing")
-             3 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1F9QWE78xpfhev20XxfWLbaP_bj8r6SRM/view?usp=sharing")
-            4 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1aSThndOpuPF5sPDCUSLPME1f3x5CslZC/view?usp=sharing")
-            5 -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1814DcVdWYRY7F35d2VMNQ6GSWC2wII24/view?usp=sharing")
+           when (flag.toUInt()) {
+               1u -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2/view?usp=drive_link")
+            2u -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1Jvxmi62UzZc9Cy34aPDZA22Wo7Zb87l5/view?usp=sharing")
+             3u -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1F9QWE78xpfhev20XxfWLbaP_bj8r6SRM/view?usp=sharing")
+            4u -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1aSThndOpuPF5sPDCUSLPME1f3x5CslZC/view?usp=sharing")
+            5u -> DisplayPdfFromGoogleCloud(pdfUrl = "https://drive.google.com/file/d/1814DcVdWYRY7F35d2VMNQ6GSWC2wII24/view?usp=sharing")
            }
-
-                when (flag2 ) {
+   when (flag2.toUInt() ) {
                     //https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2
-                    1 ->
+                    1u ->
                     DownloadScreen("https://drive.google.com/uc?export=download&id=1EA9ZTK3dPQ4IeXAnx8j_yLle1UkHMKb2")
-                    2 ->
+                    2u ->
                     DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1Jvxmi62UzZc9Cy34aPDZA22Wo7Zb87l5")
-                    3 ->
+                    3u ->
                     DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1F9QWE78xpfhev20XxfWLbaP_bj8r6SRM")
-                    4 ->
+                    4u ->
                     DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1aSThndOpuPF5sPDCUSLPME1f3x5CslZC")
-                    5 ->
+                    5u ->
                     DownloadScreen(dLink = "https://drive.google.com/uc?export=download&id=1814DcVdWYRY7F35d2VMNQ6GSWC2wII24")
-
-
 
                 }
 
