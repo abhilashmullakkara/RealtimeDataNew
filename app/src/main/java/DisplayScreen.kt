@@ -139,13 +139,11 @@ Surface(color = Color(0xFF071715)) {
                         val data = StringBuffer()
                         val etmKmr=StringBuffer()
                         val kilo=StringBuffer()
+                        Toast.makeText(context,"Record not found / searching in progress...",Toast.LENGTH_SHORT).show()
                         myRef.get()
                             .addOnSuccessListener { dataSnapshot ->
-//                                data.append("\nNo  Time   From   Via   To   Arr:Time    Kmrs\n")
-//                                data.append("  ......................................\n")
                                 if (dataSnapshot != null) {
                                     dataSnapshot.children.forEach { childSnapshot ->
-
                                         data.append("\n"+ (ti+1).toString())
                                         data.append("   "+childSnapshot.child("departureTime").value)
                                         data.append("    "+childSnapshot.child("startPlace").value)
@@ -153,7 +151,6 @@ Surface(color = Color(0xFF071715)) {
                                         data.append("    "+childSnapshot.child("destinationPlace").value)
                                         data.append("     "+childSnapshot.child("arrivalTime").value)
                                         data.append("     "+childSnapshot.child("kilometer").value)
-
                                         kilo.append(","+childSnapshot.child("kilometer").value)
                                         etmKmr.append(""+childSnapshot.child("etmNo").value+",")
                                         ti += 1

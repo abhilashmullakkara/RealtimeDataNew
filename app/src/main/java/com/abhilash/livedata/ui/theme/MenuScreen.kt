@@ -1,58 +1,82 @@
 package com.abhilash.livedata.ui.theme
 
+import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.abhilash.livedata.R
 
 @RequiresApi(Build.VERSION_CODES.M)
 @Composable
 fun MenuScreen(navController: NavController) {
 
-    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xff90918a)) {
+    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFF8f8fb3)) {
         val scroll = rememberScrollState()
         Column {
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(2.dp)
-                        .height(150.dp), // Adjust the height as needed
-                    backgroundColor = Color.White,
-                    elevation = 5.dp
-                ) {
+            Card(
+                modifier = Modifier
+                    //.fillMaxSize()
+                    .fillMaxWidth()
+                    .padding(10.dp)
+                    .height(100.dp),// Adjust the height as needed
+                backgroundColor = Color.White,
+                elevation = 5.dp
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ksrtc),
+                    contentDescription = "Image with Text",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
 
-                }
-
+            }
+        }
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top=150.dp,start=10.dp,end=10.dp, bottom = 10.dp)
+                .height(250.dp), // Adjust the height as needed
+            backgroundColor = Color.White,
+           // shape = CircleShape,
+            elevation = 5.dp
+        ) {
             Column(modifier = Modifier.verticalScroll(scroll)) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp)
-                        .height(100.dp), // Adjust the height as needed
+                        .height(50.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape = CircleShape,
+                    //shape = CircleShape,
+                    shape = RoundedCornerShape(16.dp),
+
                     elevation = 5.dp
                 ) {
-
                     TextButton(
                         onClick = {
                             navController.navigate("ReadScreen")
                         },
                         //colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                     ) {
-                        Text("Add/Update Schedule", color = Color.Blue, fontSize = 20.sp)
+                        Text("Add/Update Schedule", color = Color.Blue, fontSize = 15.sp)
                     }
                 }
                 Card(
@@ -61,7 +85,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
 
@@ -79,7 +103,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -94,7 +118,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -109,7 +133,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -124,25 +148,25 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
-                       navController.navigate("FindMyBusScreen")
+                        navController.navigate("FindMyBusScreen")
                     }) {
                         Text("Find my Bus", color = Color.Blue, fontSize = 20.sp)
                     }
                 }
 
                 //Room
-                Text("              Duty Diary", color = Color.White, fontSize =25.sp )
+                Text("              Duty Diary", color = Color.White, fontSize = 25.sp)
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -157,11 +181,11 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
-                         navController.navigate("ViewDiaryScreen")
+                        navController.navigate("ViewDiaryScreen")
                     }) {
                         Text("View Diary ", color = Color.Blue, fontSize = 20.sp)
                     }
@@ -172,11 +196,11 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
-                       navController.navigate("DeleteRecordScreen")
+                        navController.navigate("DeleteRecordScreen")
                     }) {
                         Text("Delete Record", color = Color.Blue, fontSize = 20.sp)
                     }
@@ -188,7 +212,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -204,7 +228,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color(0xFFF00B04),
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -220,7 +244,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -235,7 +259,7 @@ fun MenuScreen(navController: NavController) {
                         .padding(10.dp)
                         .height(100.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
-                    shape= CircleShape,
+                    shape = CircleShape,
                     elevation = 5.dp
                 ) {
                     TextButton(onClick = {
@@ -253,8 +277,19 @@ fun MenuScreen(navController: NavController) {
         }
 
 
+@RequiresApi(Build.VERSION_CODES.M)
 @Preview(showBackground = true)
 @Composable
-fun MenuScreenPreview(){
-    //MenuScreen()
+fun MenuScreenPreview(navController: NavHostController = NavHostController(ContextAmbient.current)){
+    MenuScreen(navController )
+}
+
+class ContextAmbient {
+    companion object {
+        val current: Context
+            get() {
+                TODO()
+            }
+    }
+
 }
