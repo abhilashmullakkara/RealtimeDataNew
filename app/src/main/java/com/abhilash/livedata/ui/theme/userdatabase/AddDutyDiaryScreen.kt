@@ -13,6 +13,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
@@ -26,26 +27,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
-import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddDutyDiaryScreen(navController: NavController){
-    Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-        IconButton(onClick = {
-            navController.popBackStack()
-        })
-        {
-            Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+    Surface(color = Color(0xFF5B6975)) {
+        Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+            IconButton(onClick = {
+                navController.popBackStack()
+            })
+            {
+                Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+            }
+            RoomData()
         }
-        RoomData()
+
     }
-    }
+       }
 
 
 @RequiresApi(Build.VERSION_CODES.O)

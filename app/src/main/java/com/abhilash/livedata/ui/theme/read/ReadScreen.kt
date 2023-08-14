@@ -29,6 +29,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -62,7 +63,7 @@ fun ReadScreen(navController: NavController) {
     var busType by rememberSaveable { mutableStateOf("") }
     var depoNo by rememberSaveable { mutableStateOf("") }
     var scheduleNo by rememberSaveable { mutableStateOf("") }
-    Surface(color = Color(0xFFC2D6F7)) {
+    Surface(color = Color(0xFF586477), contentColor = Color.Black) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -99,6 +100,7 @@ fun ReadScreen(navController: NavController) {
                     OutlinedTextField(
                         value = depoNo,
                         singleLine = true,
+                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
                         // shape = RoundedCornerShape(80),
                         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                         onValueChange = { newValue ->
@@ -122,6 +124,7 @@ fun ReadScreen(navController: NavController) {
                     OutlinedTextField(
                         value = scheduleNo,
                         singleLine = true,
+                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
                         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
                         onValueChange = { newValue ->
                             val textFieldValue =
@@ -143,6 +146,7 @@ fun ReadScreen(navController: NavController) {
                     OutlinedTextField(
                         value = busType,
                         singleLine = true,
+                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Characters
                         ),
@@ -168,12 +172,14 @@ fun ReadScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(5.dp))
             Text(
                 text = "Enter each trip of a schedule and press INSERT button below(Scroll down). After completing the schedule , change schedule number you want to save further...(need not change depo number or schedule every time when entering trip)",
-                textAlign = TextAlign.Start, modifier = Modifier.padding(10.dp)
+                textAlign = TextAlign.Start, modifier = Modifier.padding(10.dp),
+                color = Color.White
             )
+            Surface(color = Color(0xFF586477), contentColor = Color.Black) {
             Card(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 10.dp, end = 10.dp, bottom = 10.dp),
+                    .padding(start = 10.dp, top = 10.dp, end = 10.dp, bottom = 10.dp),
                 shape = RoundedCornerShape(15.dp),
                 elevation = 3.dp,
                 contentColor = Color.Black,
@@ -182,9 +188,15 @@ fun ReadScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(10.dp))
                 val scrollState = rememberScrollState()
+                Surface(color = Color(0xFF568058), contentColor = Color.White) {
                 Box(modifier = Modifier.verticalScroll(scrollState)) {
+
                     Column {
-                        Text("TripNo  Departure Time From  Via  To ArrivalTime Kilometer ETM_Root_No")
+                            Spacer(modifier = Modifier.height(7.dp))
+                        Text(
+                            "TripNo  Departure Time From  Via  To ArrivalTime Kilometer ETM_Root_No",
+                            color = Color.White
+                        )
                         Box(
                             modifier = Modifier
                                 .size(60.dp)
@@ -208,14 +220,17 @@ fun ReadScreen(navController: NavController) {
                             )
                         }
                         Spacer(modifier = Modifier.height(10.dp))
-                            RepeatRead(
-                                depoNumber = depoNo,
-                                bustype = busType,
-                                scheduleno = scheduleNo
-                            )
-                        }
+                        RepeatRead(
+                            depoNumber = depoNo,
+                            bustype = busType,
+                            scheduleno = scheduleNo
+                        )
                     }
                 }
+                }
+            }
+        }
+
             }
         }
     }
@@ -243,12 +258,14 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
     depoNo = depoNumber
     busType = bustype
     scheduleNo = scheduleno
+    Surface(color = Color(0xFF529155), contentColor = Color.White) {
     Column {
-        if(flag){
-            flag=false
-        }
-        else
-            UploadedScheduleList(depoNumber , bustype , scheduleno )
+
+
+        if (flag) {
+            flag = false
+        } else
+            UploadedScheduleList(depoNumber, bustype, scheduleno)
         val scroll = rememberScrollState()
         Spacer(modifier = Modifier.height(10.dp))
         Row(
@@ -409,7 +426,7 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
             )
             TextButton(
                 onClick = {
-                    flag=true
+                    flag = true
                     if (depoNo.isNotBlank() && scheduleNo.isNotBlank() &&
                         tripNo.isNotBlank() && stPlace.isNotBlank() &&
                         departureTime.isNotBlank() &&
@@ -445,11 +462,11 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                     .fillMaxSize(0.5f)
                     .padding(start = 50.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor =Color(0xff2e4f24),
+                    backgroundColor = Color(0xff2e4f24),
                     contentColor = Color.Blue
                 )
             ) {
-                Surface(color =Color(0xff2e4f24) ) {
+                Surface(color = Color(0xff2e4f24)) {
                     Text(
                         text = "UPLOAD",
                         fontSize = 18.sp,
@@ -461,7 +478,7 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
 
         }
 
-
+    }
     }
 }
 @Composable
