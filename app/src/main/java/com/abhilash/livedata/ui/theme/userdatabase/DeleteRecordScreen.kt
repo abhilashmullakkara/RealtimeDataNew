@@ -3,7 +3,9 @@ package com.abhilash.livedata.ui.theme.userdatabase
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -33,59 +35,83 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
 @Composable
-fun DeleteRecordScreen(navController: NavController){
-    var recNo by rememberSaveable { mutableStateOf("") }
-    val context= LocalContext.current
-    val coroutineScope= rememberCoroutineScope()
-    Surface(color = Color.White) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+fun DeleteRecordScreen(navController: NavController) {
+    Column {
+
+
+        var recNo by rememberSaveable { mutableStateOf("") }
+        val context = LocalContext.current
+        val coroutineScope = rememberCoroutineScope()
+        Surface(color = Color(0xFF320303), modifier = Modifier.fillMaxWidth()) {
             IconButton(onClick = {
                 navController.popBackStack()
-            })
-            {
-                Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowBack,
+                    tint = Color.White,
+                    contentDescription = "Arrow"
+                )
             }
-            Text(text = "Enter Record Number to delete a single record from the database",color = Color.Gray, fontSize = 18.sp)
-            OutlinedTextField(
-                value = recNo,
-                singleLine = true,
-                shape = RoundedCornerShape(80),
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                onValueChange = {
-                    recNo = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.44f)
-                    .padding(start = 10.dp),
-                placeholder = {
-                    Text(
-                        text = "Enter Record No to delete:",
-                        color = Color.Black,
-                        fontSize = 14.sp
-                    )
+        }
+        Surface(color = Color(0xFFBE5050), modifier = Modifier.fillMaxWidth()) {
+            Spacer(modifier = Modifier.height(5.dp))
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = "Enter Record Number to delete a single record from the database",
+                    color = Color.Gray,
+                    fontSize = 18.sp
+                )
+                OutlinedTextField(
+                    value = recNo,
+                    singleLine = true,
+                    shape = RoundedCornerShape(80),
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    onValueChange = {
+                        recNo = it
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.44f)
+                        .padding(start = 10.dp),
+                    placeholder = {
+                        Text(
+                            text = "Enter Record No to delete:",
+                            color = Color.Black,
+                            fontSize = 14.sp
+                        )
+                    }
+                )
+                OutlinedButton(
+                    onClick = {
+                        if (recNo.isNotBlank()) {
+                            coroutineScope.launch {
+                                EmployeeDB.getInstance(context).getEmployeeDao()
+                                    .delete(recNo.toInt())
+                                EmployeeDB.getInstance(context).getEmployeeDao().resetSequence()
+                                Toast.makeText(
+                                    context,
+                                    " Record Deleted or not existed !",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                recNo=" "
+                            }
+                        } else {
+                            Toast.makeText(context, " Input Record first", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    },
+                    modifier = Modifier.padding(start = 25.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0xFF456890))
+                ) {
+                    Text(text = "DELETE", color = Color.White, fontSize = 16.sp)
                 }
-            )
-         OutlinedButton(onClick = {
-           if (recNo.isNotBlank()){
-               coroutineScope.launch {
-                   EmployeeDB.getInstance(context).getEmployeeDao().delete(recNo.toInt())
-                   EmployeeDB.getInstance(context).getEmployeeDao().resetSequence()
-                   Toast.makeText(context," Record Deleted or not existed !",Toast.LENGTH_SHORT).show()
-               }
-       }
-             else
-           {
-             Toast.makeText(context," Input Record first",Toast.LENGTH_SHORT).show()
-           }
-         },
-             modifier = Modifier.padding(start = 25.dp),
-             colors = ButtonDefaults.buttonColors(Color(0xFF456890))
-             ) {
-             Text(text = "DELETE",color = Color.White, fontSize = 16.sp)
-         }
+            }
         }
     }
 }
+
+
+

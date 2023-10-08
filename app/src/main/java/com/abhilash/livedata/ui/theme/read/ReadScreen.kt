@@ -63,7 +63,7 @@ fun ReadScreen(navController: NavController) {
     var busType by rememberSaveable { mutableStateOf("") }
     var depoNo by rememberSaveable { mutableStateOf("") }
     var scheduleNo by rememberSaveable { mutableStateOf("") }
-    Surface(color = Color(0xFF586477), contentColor = Color.Black) {
+    Surface(color = Color(0xFF427CD8), contentColor = Color.Black) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,7 +78,7 @@ fun ReadScreen(navController: NavController) {
                     navController.popBackStack()
                 })
                 {
-                    Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+                    Icon(imageVector = Icons.Outlined.ArrowBack, tint = Color.White, contentDescription = "Arrow")
                 }
                 Text(
                     "Enter Schedule Information...   ",
@@ -97,10 +97,16 @@ fun ReadScreen(navController: NavController) {
                     .padding(8.dp), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Box(modifier = Modifier.weight(.25f)) {
+                    Surface(color= Color(0xFF637289)) {
+
+
                     OutlinedTextField(
                         value = depoNo,
                         singleLine = true,
-                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor =Color(0xFFA3C2F3),
+                            textColor = Color.Black
+                        ),
                         // shape = RoundedCornerShape(80),
                         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                         onValueChange = { newValue ->
@@ -120,11 +126,12 @@ fun ReadScreen(navController: NavController) {
                         }
                     )
                 }
+            }
                 Box(modifier = Modifier.weight(0.25f)) {
                     OutlinedTextField(
                         value = scheduleNo,
                         singleLine = true,
-                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
+                        colors=TextFieldDefaults.textFieldColors(backgroundColor =Color(0xFFA3C2F3), textColor = Color.Black),
                         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
                         onValueChange = { newValue ->
                             val textFieldValue =
@@ -146,7 +153,7 @@ fun ReadScreen(navController: NavController) {
                     OutlinedTextField(
                         value = busType,
                         singleLine = true,
-                        colors=TextFieldDefaults.textFieldColors(backgroundColor = Color.White, textColor = Color.Black),
+                        colors=TextFieldDefaults.textFieldColors(backgroundColor =Color(0xFFA3C2F3), textColor = Color.Black),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Characters
                         ),
@@ -175,7 +182,7 @@ fun ReadScreen(navController: NavController) {
                 textAlign = TextAlign.Start, modifier = Modifier.padding(10.dp),
                 color = Color.White
             )
-            Surface(color = Color(0xFF586477), contentColor = Color.Black) {
+            Surface(color = Color(0xFF7FA4E0), contentColor = Color.Black) {
             Card(
                 modifier = Modifier
                     .fillMaxSize()
@@ -188,7 +195,7 @@ fun ReadScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(10.dp))
                 val scrollState = rememberScrollState()
-                Surface(color = Color(0xFF568058), contentColor = Color.White) {
+                Surface(color = Color(0xFF427CD8), contentColor = Color.White) {
                 Box(modifier = Modifier.verticalScroll(scrollState)) {
 
                     Column {
@@ -258,7 +265,7 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
     depoNo = depoNumber
     busType = bustype
     scheduleNo = scheduleno
-    Surface(color = Color(0xFF529155), contentColor = Color.White) {
+    Surface(color = Color(0xFF8CAFE7), contentColor = Color.White) {
     Column {
 
 
@@ -281,12 +288,13 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                     Text(
                         text = "Trip ",
                         color = Color.Black,
-                        fontSize = 14.sp
+                        fontSize = 9.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(85.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = departureTime,
@@ -299,12 +307,13 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                     Text(
                         text = "Departure Time:",
                         color = Color.Black,
-                        fontSize = 12.sp
+                        fontSize = 9.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(120.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = stPlace,
@@ -317,12 +326,13 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                     Text(
                         text = "Enter Starting Place (eg:- KMR )",
                         color = Color.Black,
-                        fontSize = 12.sp
+                        fontSize = 9.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(120.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = via,
@@ -338,9 +348,10 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                         fontSize = 12.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(120.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = destination,
@@ -358,9 +369,10 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                         fontSize = 12.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(125.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = arrivalTime,
@@ -376,9 +388,10 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                         fontSize = 12.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(130.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = kilometer,
@@ -394,9 +407,10 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                         fontSize = 12.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(100.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             OutlinedTextField(
                 value = etm,
@@ -410,9 +424,10 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                         fontSize = 12.sp
                     )
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xFF02071B)) ,
                 modifier = Modifier
                     .width(100.dp)
-                    .height(80.dp)
+                    .height(60.dp)
             )
             val originalDatabase = OriginalData(
                 startPlace = stPlace,
@@ -462,11 +477,11 @@ fun RepeatRead(depoNumber:String="",bustype:String="",scheduleno:String="") {
                     .fillMaxSize(0.5f)
                     .padding(start = 50.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color(0xff2e4f24),
+                    backgroundColor = Color(0xFF6584B4),
                     contentColor = Color.Blue
                 )
             ) {
-                Surface(color = Color(0xff2e4f24)) {
+                Surface(color = Color(0xFF02122A)) {
                     Text(
                         text = "UPLOAD",
                         fontSize = 18.sp,

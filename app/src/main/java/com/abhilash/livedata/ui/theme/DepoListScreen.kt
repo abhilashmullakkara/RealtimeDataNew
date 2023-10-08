@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +37,7 @@ import com.abhilash.livedata.ui.theme.database.depoList
 
 @Composable
 fun DepoListScreen(navController: NavController) {
-    Surface(color = Color.White) {
+    Surface(color = Color(0xFF448AFF)) {
 
 
         Column {
@@ -44,13 +45,13 @@ fun DepoListScreen(navController: NavController) {
                 navController.popBackStack()
             })
             {
-                Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+                Icon(imageVector = Icons.Outlined.ArrowBack,tint=Color.White, contentDescription = "Arrow")
             }
 
             LazyColumn {
                 items(depoList) { depo ->
                 DepoItem(depoData = depo)
-                    Divider()
+                    Divider(color = Color(0xFFDBE4F4))
                 }
             }
         }
@@ -61,7 +62,7 @@ fun DepoListScreen(navController: NavController) {
 @Composable
 fun DepoItem(depoData: DepoData){
     var flag by remember { mutableStateOf(0) }
-    Surface(color = Color(0xFFA5ACAE)){
+    Surface(color = Color(0xFF7398D6)){
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 8.dp)) {
@@ -69,10 +70,10 @@ fun DepoItem(depoData: DepoData){
                 .padding(end = 8.dp, start = 15.dp)
                 .size(40.dp)
                 .clip(CircleShape),
-                backgroundColor = Color(0XFF896DA3)
+                backgroundColor = Color(0xFF5677AB)
             )
             {
-                Text(text=depoData.depoName[0].toString(),
+                Text(text=depoData.depoName[0].toString(),fontWeight=Bold,
                     textAlign = TextAlign.Center, modifier = Modifier.padding(8.dp))
             }
             Column(modifier = Modifier.weight(2.0f) ) {

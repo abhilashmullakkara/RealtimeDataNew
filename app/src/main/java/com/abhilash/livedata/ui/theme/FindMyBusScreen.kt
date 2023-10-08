@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -65,7 +64,7 @@ fun fetchDatabaseValues(
             val depoSnapshot = snapshot.child(path)
             resultList.clear()
             depoSnapshot.children.forEach { busTypeSnapshot ->
-                val busType = busTypeSnapshot.key as String
+              //  val busType = busTypeSnapshot.key as String
                 busTypeSnapshot.children.forEach { scheduleNoSnapshot ->
                     val scheduleNo = scheduleNoSnapshot.key as String
                     scheduleNoSnapshot.children.forEach { tripsSnapshot ->
@@ -94,7 +93,7 @@ fun fetchDatabaseValues(
 @Composable
 fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair<String, OriginalData>>
 {
-    Surface(color = Color(0xFFDEE0ED)) {
+    Surface(color = Color(0xF3698DBB)) {
         val resultList = remember { mutableStateListOf<Pair<String, OriginalData>>() }
         val errorMessage = remember { mutableStateOf("") }
         val databaseRef = FirebaseDatabase.getInstance().reference.child("")
@@ -108,7 +107,7 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
         })
         Column {
             if (errorMessage.value.isNotEmpty()) {
-                Text(errorMessage.value)
+                Text(errorMessage.value,color=Color.Red)
             }
             // Display the search results
             if (resultList.isNotEmpty()) {
@@ -122,7 +121,7 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
                     Text("DutyNo")
 
                 }
-                Divider()
+                Divider(color= Color(0xF3C5CBD2), thickness = 2.dp)
                 LazyColumn(modifier = Modifier.padding(start = 20.dp)) {
                     items(resultList) { (scheduleNo, result) ->
 
@@ -131,7 +130,7 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
                             .padding(end = 10.dp), horizontalArrangement = Arrangement.SpaceBetween){
                             Text(" ${result.bustype}")
                             Text(
-                                text = "${result.departureTime}",
+                                text = result.departureTime,
                                 color = Color.Red,
                                 fontSize = 18.sp
                             )
@@ -148,7 +147,7 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
                         }
 
                         // Display other fields as needed
-                        Divider(color = Color.Gray)
+                        Divider(color= Color(0xF3E4E6E8), thickness = 1.dp)
                     }
                 }
             } else {
@@ -160,13 +159,15 @@ fun searchAndStorePath(path: String = "", destination: String = "")//: List<Pair
 }
 @Composable
 fun FindMyBusScreen(navController:NavController) {
-    Surface(color = Color.White) {
+    Surface(color = Color(0xF342699C)) {
         var depo by rememberSaveable { mutableStateOf("") }
         var destination by rememberSaveable { mutableStateOf("") }
         var flag by rememberSaveable { mutableStateOf(false) }
         Column {
             IconButton(onClick = { navController.popBackStack() }) {
+                Surface (color = Color(0xF380B0ED), modifier = Modifier.fillMaxWidth()){
                 Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+            }
             }
            // Spacer(modifier = Modifier.height(8.dp))
             Text(

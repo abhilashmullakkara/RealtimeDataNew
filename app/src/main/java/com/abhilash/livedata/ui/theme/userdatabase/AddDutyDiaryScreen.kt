@@ -35,14 +35,15 @@ import java.util.Date
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AddDutyDiaryScreen(navController: NavController){
-    Surface(color = Color(0xFF5B6975)) {
+    Surface(color = Color(0xFF073415)) {
         Column(verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             IconButton(onClick = {
                 navController.popBackStack()
             })
             {
-                Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+                Icon(imageVector = Icons.Outlined.ArrowBack,tint=Color.White, contentDescription = "Arrow")
             }
+           // Spacer(modifier = Modifier.height(5.dp))
             RoomData()
         }
 

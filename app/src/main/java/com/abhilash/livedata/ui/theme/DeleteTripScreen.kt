@@ -47,7 +47,7 @@ fun DeleteTripScreen(navController: NavController) {
     var depoNo by rememberSaveable { mutableStateOf("") }
     var bType by rememberSaveable { mutableStateOf("") }
     val context= LocalContext.current
-    Surface(color = Color(0xFFC2D6F7)) {
+    Surface(color = Color(0xFF3960A0)) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,7 +63,7 @@ fun DeleteTripScreen(navController: NavController) {
             Text(
                 "Enter Trip Information to Delete",
                 fontSize = 19.sp,
-                color = Color.Red,
+                color = Color(0xFFFF5252),
                 fontWeight = FontWeight.SemiBold,
             )
             //Read field to delete
@@ -74,7 +74,7 @@ fun DeleteTripScreen(navController: NavController) {
                 shape = RoundedCornerShape(15.dp),
                 elevation = 3.dp,
                 contentColor = Color.Black,
-                backgroundColor = Color.White
+                backgroundColor = Color(0xFF7197D6)
             ) {
                 val scrollState = rememberScrollState()
                 Box(modifier = Modifier.verticalScroll(scrollState)) {

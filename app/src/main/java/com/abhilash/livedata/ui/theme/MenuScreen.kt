@@ -113,7 +113,7 @@ fun MenuScreen(navController: NavController) {
                        TextButton(
                            onClick = {
                                navController.navigate("ReadScreen")
-                           },
+                           }, colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))
                            //colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
                        ) {
                            Text("Add/Update ", color = Color.Blue, fontSize = 15.sp)
@@ -131,7 +131,7 @@ fun MenuScreen(navController: NavController) {
                     Row {
                         TextButton(onClick = {
                             navController.navigate("DisplayScreen")
-                        }) {
+                        },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                             Text("View Schedule ", color = Color.Blue, fontSize = 20.sp)
                         }
                         Icon(
@@ -147,7 +147,7 @@ fun MenuScreen(navController: NavController) {
                      Row {
                          TextButton(onClick = {
                              navController.navigate("DeleteTripScreen")
-                         }) {
+                         },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                              Text("Delete Trip", color = Color.Blue, fontSize = 20.sp)
                          }
                          Icon(
@@ -163,7 +163,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("DeleteScheduleScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Delete Schedule", color = Color.Blue, fontSize = 18.sp)
                             }
                             Icon(
@@ -200,7 +200,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("DepoListScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Find my depo number", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -216,7 +216,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("FindMyBusScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Find my Bus", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -251,7 +251,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("AddDutyDiaryScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Add Duty ", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -267,7 +267,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("ViewDiaryScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("View Diary ", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -283,7 +283,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("DeleteRecordScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Delete Record", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -299,7 +299,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("UpdateDutyDiaryScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("Update duty Diary", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -315,7 +315,7 @@ fun MenuScreen(navController: NavController) {
                         Row {
                             TextButton(onClick = {
                                 navController.navigate("DeleteAllRecordScreen")
-                            }) {
+                            },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                                 Text("DELETE ALL", color = Color.Blue, fontSize = 20.sp)
                             }
                             Icon(
@@ -343,7 +343,7 @@ fun MenuScreen(navController: NavController) {
                 ) {
                     TextButton(onClick = {
                         navController.navigate("CurrencyCountScreen")
-                    }) {
+                    },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                         Text("Currency Count ", color = Color.Blue, fontSize = 20.sp)
                     }
                 }
@@ -360,7 +360,7 @@ fun MenuScreen(navController: NavController) {
                 ) {
                     TextButton(onClick = {
                         navController.navigate("FareTableScreen")
-                    }) {
+                    },colors =ButtonDefaults.buttonColors(Color(0xFFF0E9EB))) {
                         Text("Fare Tables ", color = Color.Blue, fontSize = 20.sp)
                     }
                 }

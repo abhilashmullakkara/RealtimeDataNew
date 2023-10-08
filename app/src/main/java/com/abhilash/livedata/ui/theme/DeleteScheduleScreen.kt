@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -20,6 +21,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -47,7 +49,7 @@ fun DeleteScheduleScreen(navController:NavController){
         var depoNo by rememberSaveable { mutableStateOf("") }
         var bType by rememberSaveable { mutableStateOf("") }
         val context= LocalContext.current
-        Surface(color = Color(0xFFDDC2F7)) {
+        Surface(color = Color(0xFF975ECD)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -58,7 +60,7 @@ fun DeleteScheduleScreen(navController:NavController){
                     navController.popBackStack()
                 })
                 {
-                    Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+                    Icon(imageVector = Icons.Outlined.ArrowBack,tint= Color.White, contentDescription = "Arrow")
                 }
                 Text(
                     "Enter Schedule Information to Delete",
@@ -74,7 +76,7 @@ fun DeleteScheduleScreen(navController:NavController){
                     shape = RoundedCornerShape(15.dp),
                     elevation = 3.dp,
                     contentColor = Color.Black,
-                    backgroundColor = Color.White
+                    backgroundColor =  Color(0xFFA37DC9)
                 ) {
                     val scrollState = rememberScrollState()
                     Box(modifier = Modifier.verticalScroll(scrollState)) {
@@ -93,7 +95,9 @@ fun DeleteScheduleScreen(navController:NavController){
                                         color = Color.Black,
                                         fontSize = 15.sp
                                     )
-                                }
+                                },
+                                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFFC4A8E0),
+                                    textColor= Color.Black)
                             )
                             Spacer(modifier = Modifier.height(20.dp))
                             OutlinedTextField(value = bType,
@@ -111,7 +115,9 @@ fun DeleteScheduleScreen(navController:NavController){
                                         color = Color.Black,
                                         fontSize = 15.sp
                                     )
-                                }
+                                },
+                                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFFC4A8E0),
+                                    textColor= Color.Black)
                             )
                             Spacer(modifier = Modifier.height(20.dp))
                             OutlinedTextField(value = scheduleNo,
@@ -126,7 +132,9 @@ fun DeleteScheduleScreen(navController:NavController){
                                         color = Color.Black,
                                         fontSize = 15.sp
                                     )
-                                }
+                                },
+                                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFFC4A8E0),
+                                    textColor= Color.Black)
                             )
 
                             Spacer(modifier = Modifier.height(20.dp))
@@ -173,8 +181,10 @@ fun DeleteScheduleScreen(navController:NavController){
                                     ).show()
                                 }
                                // navController.popBackStack()
-                            }) {
-                                Text(text = "Delete")
+                            },
+                                colors = ButtonDefaults.buttonColors(Color(0xFFE01540))
+                                ) {
+                                Text(text = "DELETE", color = Color.White, fontSize =16.sp , fontWeight = FontWeight.SemiBold)
 
                             }
 

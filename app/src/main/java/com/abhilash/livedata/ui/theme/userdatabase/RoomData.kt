@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -36,7 +39,7 @@ import java.util.Date
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun RoomData() {
-    Surface(color = Color(0xFF5B6975))
+    Surface(color =Color(0xFF21733B))
     {
         val context = LocalContext.current
         val coroutineScope = rememberCoroutineScope()
@@ -67,10 +70,12 @@ fun RoomData() {
                 placeholder = {
                     Text(
                         text = "Schedule NO:",
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp
                     )
-                }
+                },
+                colors= TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFF46A765),
+                    textColor = Color.Black )
             )
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -90,10 +95,12 @@ fun RoomData() {
                 placeholder = {
                     Text(
                         text = "No of duty earned:",
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp
                     )
-                }
+                },
+                colors= TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFF46A765),
+                    textColor = Color.Black)
             )
             Spacer(modifier = Modifier.height(10.dp))
             // Text("Select Date ")
@@ -102,7 +109,7 @@ fun RoomData() {
             Text(
                 "Optional Data (below)",
                 fontSize = 17.sp,
-                color = Color.Red,
+                color = Color(0xFFCFDAD2),
                 modifier = Modifier.padding(start = 10.dp)
             )
             Divider(thickness = 3.dp)
@@ -123,10 +130,12 @@ fun RoomData() {
                 placeholder = {
                     Text(
                         text = "Collection:",
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp
                     )
-                }
+                },
+                colors= TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFF46A765),
+                    textColor = Color.Black )
 
             )
             Spacer(modifier = Modifier.height(10.dp))
@@ -147,10 +156,12 @@ fun RoomData() {
                 placeholder = {
                     Text(
                         text = "Way Bill No",
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp
                     )
-                }
+                },
+                colors= TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFF46A765),
+                    textColor = Color.Black )
             )
             Spacer(modifier = Modifier.height(10.dp))
 //
@@ -168,10 +179,12 @@ fun RoomData() {
                 placeholder = {
                     Text(
                         text = "Name of the crew",
-                        color = Color.Black,
+                        color = Color.White,
                         fontSize = 14.sp
                     )
-                }
+                },
+                colors= TextFieldDefaults.textFieldColors(backgroundColor = Color(0xFF46A765),
+                    textColor = Color.Black )
             )
             //INSERT
             OutlinedButton(onClick = {
@@ -204,8 +217,11 @@ fun RoomData() {
                 } else {
                     Toast.makeText(context, "Input Record first", Toast.LENGTH_SHORT).show()
                 }
-            }) {
-                Text("INSERT")
+            },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF115F2A),
+                    contentColor =  Color.White)
+                ) {
+                Text("INSERT", fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             }
 
         }

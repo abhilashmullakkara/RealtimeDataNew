@@ -1,3 +1,4 @@
+
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,6 +20,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
@@ -59,7 +61,7 @@ fun  DisplayScreen(navController: NavController){
     var result by rememberSaveable { mutableStateOf("") }
     var etmresult by rememberSaveable { mutableStateOf("") }
     var kilomts by rememberSaveable { mutableStateOf("") }
-Surface(color = Color(0xFF071715)) {
+Surface(color = Color(0xFF07473F)) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -84,10 +86,10 @@ Surface(color = Color(0xFF071715)) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(5.dp)
-                .background(color = Color.White, shape = RoundedCornerShape(16.dp))
+                .background(color = Color(0xF3B5CFF0), shape = RoundedCornerShape(16.dp))
                 .border(
                     width = 1.dp,
-                    color = Color.LightGray,
+                    color = Color(0xF342699C),
                     shape = RoundedCornerShape(16.dp)
                 )
                 .padding(16.dp)
@@ -100,6 +102,7 @@ Surface(color = Color(0xFF071715)) {
                         depoNo = textFieldValue.text
                     }
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xF3011938)),
                 label = { Text("Depo NO") },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth()
@@ -113,6 +116,7 @@ Surface(color = Color(0xFF071715)) {
                         scheduleNo = textFieldValue.text
                     }
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xF3011938)),
                 label = { Text("Schedule NO") },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
                 modifier = Modifier.fillMaxWidth()
@@ -126,6 +130,7 @@ Surface(color = Color(0xFF071715)) {
                         busType = textFieldValue.text
                     }
                 },
+                colors = TextFieldDefaults.textFieldColors(Color(0xF3011938)),
                 label = { Text("Type(FP,Ord,JNT)") },
                 keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Characters),
                 modifier = Modifier.fillMaxWidth()
@@ -173,7 +178,7 @@ Surface(color = Color(0xFF071715)) {
             ) {
                 Text("Display")
             }
-            Text(text = "Check Internet Connection", color = Color.LightGray)
+            Text(text = "Check Internet Connection", color = Color(0xF3267BE8))
         }
         if(flag==1){
             var isLoading by rememberSaveable{

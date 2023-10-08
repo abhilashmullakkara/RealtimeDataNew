@@ -45,7 +45,7 @@ fun ViewDiaryScreen(navController: NavController) {
     val scroll = rememberScrollState()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
-    Surface(color = Color.White) {
+    Surface(color = Color(0xF3B5CFF0)) {
 
 
         Column(
@@ -56,7 +56,7 @@ fun ViewDiaryScreen(navController: NavController) {
                 navController.popBackStack()
             })
             {
-                Icon(imageVector = Icons.Outlined.ArrowBack, contentDescription = "Arrow")
+                Icon(imageVector = Icons.Outlined.ArrowBack,tint= Color.White, contentDescription = "Arrow")
             }
             Text("For detailed view rotate the screen ", color = Color.Gray, fontSize = 14.sp)
 
@@ -117,37 +117,46 @@ fun ViewDiaryScreen(navController: NavController) {
 
             }
 
-            Text("Record    Duty      Date    Duty earned     W/B no  CrewName    Collection", modifier = Modifier.padding(start=10.dp).fillMaxWidth())
+            Text("Record    Duty      Date    Duty earned     W/B no  CrewName    Collection",color=Color.White, modifier = Modifier
+                .padding(start = 10.dp)
+                .fillMaxWidth())
             Column(modifier = Modifier.verticalScroll(scroll)) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(10.dp)
+                        .padding(20.dp)
                         .height(600.dp), // Adjust the height as needed
                     backgroundColor = Color.White,
                     shape = RoundedCornerShape(0.4f),
                     elevation = 5.dp
                 ) {
+                    Surface (color = Color(0xFFB4B7CA)){
+
+
                     if (flag) {
                         Text(
                             text = result2,
-                            color = Color.Red,
-                            fontSize = 17.sp,
-                            textAlign =TextAlign.Justify,
-                            modifier = Modifier.fillMaxSize().padding(start = 15.dp)
+                            color = Color(0xFF101A51),
+                            fontSize = 18.sp,
+                            textAlign = TextAlign.Justify,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(start = 15.dp)
                         )
                     } else {
                         //  Toast.makeText(context, "Record not found", Toast.LENGTH_SHORT).show()
                         Text(
                             text = result,
-                            color = Color.Red,
-                            fontSize = 17.sp,
-                            textAlign =TextAlign.Justify,
-                            modifier = Modifier.fillMaxSize().padding(start = 15.dp)
+                            color = Color(0xFF101A51),
+                            fontSize = 18.sp,
+                            textAlign = TextAlign.Justify,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(start = 15.dp)
                         )
                     }
 
-
+                }
                 }
             }
         }
