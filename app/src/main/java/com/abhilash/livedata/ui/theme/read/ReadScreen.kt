@@ -1,6 +1,7 @@
 package com.abhilash.livedata.ui.theme.read
 
 import android.widget.Toast
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -60,7 +62,7 @@ fun ReadScreen(navController: NavController) {
     var stPlace by rememberSaveable { mutableStateOf("") }
     var arrivalTime by rememberSaveable { mutableStateOf("") }
     val context= LocalContext.current
-    Surface(color = Color(0xFFC2D6F7)) {
+    Surface(color = Color(0xFF85A2D2)) {
       Column(
        modifier = Modifier.fillMaxWidth(),
        horizontalAlignment = Alignment.CenterHorizontally,
@@ -146,11 +148,11 @@ fun ReadScreen(navController: NavController) {
                     }
                 )
             }
-            Spacer(modifier = Modifier.height(5.dp))
-            Text(
-                text = "Enter each trip of a schedule and press INSERT button below(Scroll down). After completing the schedule , change schedule number you want to save further...(need not change depo number or schedule every time when entering trip)",
-                textAlign = TextAlign.Start, modifier = Modifier.padding(10.dp)
-            )
+           // Spacer(modifier = Modifier.height(5.dp))
+//            Text(
+//                text = "Enter each trip of a schedule and press INSERT button below(Scroll down). After completing the schedule , change schedule number you want to save further...(need not change depo number or schedule every time when entering trip)",
+//                textAlign = TextAlign.Start, modifier = Modifier.padding(10.dp)
+//            )
             Spacer(modifier = Modifier.height(30.dp))
 
             Card(
@@ -160,7 +162,7 @@ fun ReadScreen(navController: NavController) {
                 shape = RoundedCornerShape(15.dp),
                 elevation = 3.dp,
                 contentColor = Color.Black,
-                backgroundColor = Color.White
+                backgroundColor = Color(0xFFAEB2C7)
             ) {
                 val scrollState = rememberScrollState()
                 Box(modifier = Modifier.verticalScroll(scrollState)) {
@@ -170,127 +172,152 @@ fun ReadScreen(navController: NavController) {
 
 
                         Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = tripNo,
+                        Text("Trip NO   DepartureTime  SatartPlace  Via Destination  Arr_Time Kilometer  *ETM_No*")
+                        val scroll= rememberScrollState()
+                        Row(modifier=Modifier.horizontalScroll(scroll)){
+                            OutlinedTextField(value = tripNo,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 70.dp, height = 51.dp),
+                                // shape = Card,
+                                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                                onValueChange = { tripNo = it },
+                                //modifier=Modifier.padding(start = 20.dp,end=250.dp),
+                                placeholder = {
+                                    Text(
+                                        text = "Trip ",
+                                        color = Color(0xFF10236B),
+                                        fontSize =14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+
+                            OutlinedTextField(value = departureTime,
                             singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { tripNo = it },
-                            //modifier=Modifier.padding(start = 20.dp,end=250.dp),
-                            placeholder = {
-                                Text(
-                                    text = "Enter Trip Number (eg:- 1)",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = departureTime,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
+                            modifier= Modifier
+                                .size(width = 75.dp, height = 51.dp),
+                            //shape = RoundedCornerShape(80),
                             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                             onValueChange = { departureTime = it },
                             placeholder = {
                                 Text(
-                                    text = "Enter Departure Time (eg:- 06.00)",
-                                    color = Color.Black,
+                                    text = "Time",
+                                    color = Color(0xFF10236B),
                                     fontSize = 14.sp
                                 )
                             }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = stPlace,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            // keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Characters
-                            ),
-                            onValueChange = { stPlace = it },
-                            //modifier=Modifier.padding(start = 20.dp,end=250.dp),
-                            placeholder = {
-                                Text(
-                                    text = "Enter Starting Place (eg:- KMR )",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        //
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = via,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Characters
-                            ),
-                            onValueChange = { via = it },
-                            placeholder = {
-                                Text(
-                                    text = "Enter via (eg:- KTR )",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = destination,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Characters
-                            ),
-                            onValueChange = { destination = it },
-                            placeholder = {
-                                Text(
-                                    text = "Enter Destination Place (eg:- KTM )",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = arrivalTime,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { arrivalTime = it },
-                            placeholder = {
-                                Text(
-                                    text = "Enter Arrival Time (Eg:-18.00)",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = kilometer,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { kilometer = it },
-                            placeholder = {
-                                Text(
-                                    text = "Enter Trip Kilometer :",
-                                    color = Color.Black,
-                                    fontSize = 15.sp
-                                )
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-                        OutlinedTextField(value = etm,
-                            singleLine = true,
-                            shape = RoundedCornerShape(80),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                            onValueChange = { etm = it },
-                            placeholder = {
-                                Text(
-                                    text = "Etm root No(optional)",
-                                    color = Color.Black,
-                                    fontSize = 14.sp
-                                )
-                            }
-                        )
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+                            OutlinedTextField(value = stPlace,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 75.dp, height = 51.dp),
+                                // shape = RoundedCornerShape(80),
+                                // keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
+                                keyboardOptions = KeyboardOptions(
+                                    capitalization = KeyboardCapitalization.Characters
+                                ),
+                                onValueChange = { stPlace = it },
+                                //modifier=Modifier.padding(start = 20.dp,end=250.dp),
+                                placeholder = {
+                                    Text(
+                                        text = "Start",
+                                        color = Color(0xFF10236B),
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+                            OutlinedTextField(value = via,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 75.dp, height = 51.dp),
+                                // shape = RoundedCornerShape(80),
+                                keyboardOptions = KeyboardOptions(
+                                    capitalization = KeyboardCapitalization.Characters
+                                ),
+                                onValueChange = { via = it },
+                                placeholder = {
+                                    Text(
+                                        text = "Via",
+                                        color = Color(0xFF10236B),
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+
+                            OutlinedTextField(value = destination,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 85.dp, height = 51.dp),
+                                //shape = RoundedCornerShape(80),
+                                keyboardOptions = KeyboardOptions(
+                                    capitalization = KeyboardCapitalization.Characters
+                                ),
+                                onValueChange = { destination = it },
+                                placeholder = {
+                                    Text(
+                                        text = "Destination",
+                                        color = Color(0xFF10236B),
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+                            OutlinedTextField(value = arrivalTime,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 75.dp, height = 51.dp),
+                                //shape = RoundedCornerShape(80),
+                                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                                onValueChange = { arrivalTime = it },
+                                placeholder = {
+                                    Text(
+                                        text = "A_Time",
+                                        color = Color(0xFF10236B),
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+                            OutlinedTextField(value = kilometer,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 75.dp, height = 51.dp),
+                                //shape = RoundedCornerShape(80),
+                                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                                onValueChange = { kilometer = it },
+                                placeholder = {
+                                    Text(
+                                        text = "Kilometer",
+                                        color = Color(0xFF10236B),
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            )
+                            Spacer(modifier = Modifier.width(7.dp))
+                            OutlinedTextField(value = etm,
+                                singleLine = true,
+                                modifier= Modifier
+                                    .size(width = 90.dp, height = 51.dp),
+                                // shape = RoundedCornerShape(80),
+                                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                                onValueChange = { etm = it },
+                                placeholder = {
+                                    Text(
+                                        text = "Optional*",
+                                        color = Color(0xFFFFC107),
+                                        fontSize = 15.sp
+                                    )
+                                }
+                            )
+
+
+
+                        }
+
 
                         val originalDatabase = OriginalData(
                             startPlace = stPlace,
